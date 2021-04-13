@@ -1,0 +1,11 @@
+.DS_Store
+/db/mysql_data
+.env
+.env.prod
+src/tmp/uploads/*
+src/tmp/upload/*
+src/public/tmp/upload/*
+src/public/uploads/*
+redis/*
+redis/dump.rdb
+src/db/data.yml

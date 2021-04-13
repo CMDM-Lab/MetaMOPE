@@ -1,0 +1,49 @@
+version: '3.2'
+services:
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - ./db/mysql_data:/var/lib/mysql
+      - type: bind
+        source: ./my.cnf
+        target: /etc/mysql/my.cnf
+    env_file:
+      - .env
+    ports:
+      - "3307:3307"
+    networks:
+      - network
+  redis:
+    image: 'redis:4.0-alpine'
+    command: redis-server
+    volumes:
+      - './redis:/data'
+    networks:
+      - network
+  web:
+    depends_on:
+      - 'db'
+      - 'redis'
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    command: foreman start -f Procfile -p 3002
+    env_file:
+      - .env
+    volumes:
+      - ./src:/usr/local/app
+      - type: tmpfs
+        target: /usr/local/app/tmp/pids/
+      - bundler_gems:/usr/local/bundle/
+    ports:
+      - "3002:3002"
+      - "35729:35729"
+    links:
+      - db
+    networks:
+      - network
+volumes:
+  bundler_gems:
+networks:
+  network:
