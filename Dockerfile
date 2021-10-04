@@ -29,9 +29,12 @@ ADD ./src/Gemfile $APP_ROOT/Gemfile
 COPY ./src/yarn.lock $APP_ROOT/
 
 RUN bundle install --jobs 20 --retry 5
-RUN yarn upgrade webpack@^4.0.0 \
-    yarn install
+#RUN yarn upgrade webpack@^4.0.0 \
+#    yarn install
+RUN yarn add webpack-dev-server@3.11.2 --exact
+RUN yarn install
 COPY ./src/ $APP_ROOT
+CMD rails webpacker:install
 CMD rails tmp:cache:clear
 CMD rails db:migrate assets:precompile
 
