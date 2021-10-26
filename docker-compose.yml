@@ -28,7 +28,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    command: foreman start -f Procfile -p 3002
+    command: foreman start -f Procfile -p 13002
     env_file:
       - .env
     volumes:
@@ -37,7 +37,7 @@ services:
         target: /usr/local/app/tmp/pids/
       - bundler_gems:/usr/local/bundle/
     ports:
-      - "3002:3002"
+      - "13002:13002"
       - "35729:35729"
     links:
       - db

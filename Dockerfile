@@ -38,4 +38,4 @@ CMD rails webpacker:install
 CMD rails tmp:cache:clear
 CMD rails db:migrate assets:precompile
 
-EXPOSE 3002
+EXPOSE 13002

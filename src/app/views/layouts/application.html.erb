@@ -1,18 +1,97 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>MetaHILIC</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaMOPE</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track' => true %>
+</head>
+<body>
+    <% this_id = (session[:id].nil?) ? '':session[:id] %>
+    <% this_key = (session[:access_key].nil?) ? '':session[:access_key] %>
+    <div class="container">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">MetaMOPE</a></div>
+                    <div class="navbar-content">
+                        <ul class="nav navbar-nav ">
+                            <li><a href="/projects/new"><i class="fa fa-plus-circle"></i> Create a project</a></li>
+                            <li><a href="/upload/start"><i class="fa fa-cloud-upload"></i> Upload samples</a></li>
+                            <li><a href="/projects/run"><i class="fa fa-play-circle"></i> Run analyses</a></li>
+                            <li><a href="/projects/retrieve"><i class="fa fa-cloud-download"></i> Retrieve results</a></li>
+                        </ul>    
+                        <ul class="nav navbar-nav navbar-right">
+                            <% if user_signed_in? %>
+                                <li><a href="/users/projects">My Projects</a></li>
+                                <li><%= link_to('Log Out', destroy_user_session_path, :method => :delete) %></li>
+                            <% else %>
+                                <li><%= link_to('Sign in', new_user_session_path) %></li>
+                                <li><%= link_to('Sign up', new_user_registration_path) %></li>
+                            <% end %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <p class="notice"></p>
+        <p class="alert"></p>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+		<%= yield %>
+		
+		<hr>
+		<footer class="footer" >
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-md-offset-2">
+						<img style="height: 60px" src="/assets/ntulogo.png">
+						
+						<p>
+							National Taiwan University
+							<br/>
+							No. 1, Sec. 4, Roosevelt Road, Taipei, 10617 Taiwan(R.O.C)
+							<br/>
+							+886-2-3366-3366
+							<br/>
+							<a href="https://www.ntu.edu.tw">https://www.ntu.edu.tw</a>
+							<br>
+							<br>
+						</p>
+					</div>
+					<div class="col-md-2 col-md-offset-3">
+						<img style="height: 60px" src="/assets/cmdmlogo.png">
+						<br>
+						Computational Molecular Design and Metabolomics  Laboratory
+						<br/>
+						No. 1, Sec. 4, Roosevelt Road, Taipei, 10617 Taiwan(R.O.C)
+						<br/>
+						+886-2-33664888 Ext. 403
+						<br/>
+						<a href="https://web.cmdm.tw/">https://web.cmdm.tw</a>
+					</div>
+					<p>This application is optimized for google chrome.</p>
+				</div>
+			</div>
+		</footer>
+	</div>
 
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
-  </body>
-</html>
+<script>
+
+<% if notice %>
+        showNotice("<%= notice %>");
+<% end %>
+<% if alert %>
+        showError("<%= alert %>");
+<% end %>
+</script>
+	
+</body>
+</html>	
