@@ -17,6 +17,20 @@ RUN apt-get update && apt-get install -y \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update && apt-get install -y nodejs yarn
 
+# Define build arguments
+ARG USER_ID
+ARG GROUP_ID
+
+# Define environment variables
+ENV USER_ID=$USER_ID
+ENV GROUP_ID=$GROUP_ID
+ENV USER_ID=${USER_ID:-1001}
+ENV GROUP_ID=${GROUP_ID:-1001}
+
+# Add group and user based on build arguments
+RUN addgroup --gid ${GROUP_ID} myersccy
+RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} myersccy
+
 ENV LC_ALL C.UTF-8
 ENV TZ Asia/Taipei
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -37,5 +51,7 @@ COPY ./src/ $APP_ROOT
 CMD rails webpacker:install
 CMD rails tmp:cache:clear
 CMD rails db:migrate assets:precompile
+
+RUN chown -R myersccy:myersccy /usr/local/app
 
 EXPOSE 13002

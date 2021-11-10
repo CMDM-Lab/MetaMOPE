@@ -28,6 +28,9 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
+      args:
+        USER_ID: $USER_ID
+        GROUP_ID: $GROUP_ID
     command: foreman start -f Procfile -p 13002
     env_file:
       - .env

@@ -1,0 +1,33 @@
+<div class="content">
+    <h2 style="font-size:36px">Projects</h2>
+    <hr style="width:1210px">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Created at</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @projects.each do |project| %>
+                <tr>
+                    <td><%= project.name %>
+                        <br>
+                        Access_key: <%= project.access_key %>
+                        <br>
+                        <div class='btn-group'>
+                            <%= link_to 'Select', project_upload_path(project.id), :title => 'Select this project' %>
+                        </div>
+                    </td>
+                    <td><%= project.status %></td>
+                    <td><%= project.created_at %></td>
+                    <td></td>
+                <tr>
+            <% end %>
+        </tbody>
+    </table>
+
+    <%= link_to 'Create a project', new_project_path, :class => 'btn fa-plus-circle btn-right' %>
+</div>

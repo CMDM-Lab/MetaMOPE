@@ -134,7 +134,7 @@ a:hover{
     display: table
 }
 
-li > a {
+li > a{
     color: rgb(119,119,119);
     padding-top: 15px;
     padding-bottom: 15px;
@@ -202,7 +202,7 @@ h2{
 }
 
 hr{
- width: 1170px;
+
  margin-top: 20px;
  margin-bottom: 20px;
  border-top: 1px solid rgb(238,238,238);   
@@ -210,7 +210,6 @@ hr{
 
 footer{ 
     background-color: rgb(245,245,245);
-    width: 1170px;
     height: 220px;
     margin-right: auto;
     margin-left: auto;
@@ -235,9 +234,13 @@ footer{
     margin-left: 16.66666667%;
 }
 
-.log-in, .sign-up, .new-password{
+.content{
     margin-top: 40px;
     margin-left: 85px;
+}
+
+.table{
+    width: 1210px;
 }
 
 label{
@@ -247,8 +250,8 @@ label{
     color: rgb(50,50,50);
 }
 
-.field > input{
-    width: 95%;
+.field > input {
+    width: 1210px;
     height: 34px;
     padding: 6px 12px;
     color: rgb(85,85,85);
@@ -262,7 +265,7 @@ label{
     margin-bottom: 15px;
 }
 
-[type='submit']{
+[type='submit'], .btn{
     color: white;
     background-color: rgb(51,122,183);
     border-color: rgb(46,109,164);
@@ -270,4 +273,8 @@ label{
     margin-top: 15px;
     margin-bottom: 15px;
     border-radius: 4px;
+}
+
+.btn-right{
+    margin-left: 1035px;
 }

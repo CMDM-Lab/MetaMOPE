@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: { sessions: "users/sessions" }
 
   devise_scope :user do  
@@ -7,4 +8,10 @@ Rails.application.routes.draw do
   end
  
   root 'home#index'
+  
+  post '/projects/new' => 'projects#create'
+  get '/projects/run' => 'projects#run', :as => 'run_project'
+  get '/projects/upload(/:id)' => 'projects#upload', :as => 'project_upload'
+  resources :projects
+  
 end

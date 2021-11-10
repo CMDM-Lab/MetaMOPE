@@ -1,0 +1,48 @@
+<div class="content">
+    <h2 style="font-size:36px">New project</h2>
+    <hr style="width:1210px">
+
+    <%= form_for(@project, :html => { :class => "form-horizontal project" }) do |f| %>
+        <% if @project.errors.any? %>
+            <div id="error_expl" class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <% @project.errors.full_messages.each do |msg| %>
+                            <li><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+            </div> 
+        <% end %>
+        
+        
+        <div class="control-group">
+            <%= f.label :name, :class => 'control-label' %>
+            <div class="controls field">
+                <%= f.text_field :name, :class => 'form-control' %>
+            </div>
+        </div>
+            
+        <div>
+            <%= f.label :services, :class => 'control-label' %>
+            <div>
+                <%= f.check_box :mobile_phase_evaluation%>
+                <%= f.label :mobile_phase_evaluation %>
+                <br>
+                <%= f.check_box :peak_evaluation%>
+                <%= f.label :peak_evaluation %>
+            </div>
+        </div>
+
+        <hr style="width:1210px">
+        <%= f.submit "Create Project" %>
+        
+        
+    <% end %>
+    
+</div>
