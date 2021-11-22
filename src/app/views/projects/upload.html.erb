@@ -1,4 +1,36 @@
 <div class="content">
     <h2 style='font-size:36px'>Upload project file</h2>
     <hr style="width:1210px">
+
+    <%= form_for @project do |f| %>
+        <% if @project.mobile_phase_evaluation %>
+            <% if @project.peak_evaluation %>
+                <h3>Mobile phase & Peak evaluation</h3>
+            <% else %>
+                <h3>Mobile phase evaluation</h3>
+            <% end %>
+            <div>
+                <%= f.label :upload_standard_file %>
+                <%= f.file_field :upload %>
+                <br>
+                <%= f.submit "Upload" %>
+            </div>
+        
+            <div>
+                <%= f.label :upload_sample_file %>
+                <%= f.file_field :upload %>
+                <br>
+                <%= f.submit "Upload" %>
+            </div>
+
+        <% else %>
+            <h3>Peak evaluation</h3>
+            <div>
+                <%= f.label :upload_sample_file %>
+                <%= f.file_field :upload %>
+                <br>
+                <%= f.submit "Upload" %>
+            </div>
+        <% end %>
+    <% end %>
 </div>

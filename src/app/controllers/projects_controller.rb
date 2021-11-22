@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
     end
     
     def create
-        @project = Project.new(params.require(:project).permit(:name, :mobile_phase_evaluation, :peak_evaluation))
+        @project = Project.new(project_params)
         @project.user_id = current_user.id
         @project.access_key = [*('a'..'z'),*('0'..'9')].shuffle[0,12].join
         #@project.status = Project::New
@@ -31,14 +31,27 @@ class ProjectsController < ApplicationController
     end
 
     def upload
-        @project = Project.find(params[:id])
-        if @project.user_id == current_user.id
-            session[:access_key] = @project.access_key
-            @project.save 
-        else    
-            flash[:alert] = "You have no permission to upload files to this project."
-			redirect_to root_path  
+        if params[:id].nil?
+            flash[:alert] = 'Please create a project or select a project from Project list to upload your data (a blue button under the project name)'
+  	        redirect_to projects_path
+  		return
+        else
+            @project = Project.find(params[:id])
+            if @project.user_id == current_user.id
+                session[:access_key] = @project.access_key
+                @project.save 
+            else    
+                flash[:alert] = "You have no permission to upload files to this project."
+                redirect_to root_path  
+            end
         end       
+    end
+
+    def update
+        @project = Project.find(params[:id])
+        @project.upload = params[:upload]
+        @project.save
+        redirect_to run_project_path 
     end
 
     def run
@@ -48,4 +61,10 @@ class ProjectsController < ApplicationController
             return
         end       
     end
+
+    private
+    def project_params
+        params.require(:project).permit(:access_key, :name, :mobile_phase_evaluation, :peak_evaluation, :upload)
+    end
+
 end
