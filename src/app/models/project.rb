@@ -6,5 +6,5 @@ class Project < ApplicationRecord
 	Project::FINISHED = 4
 
     belongs_to :user
-	mount_uploader :upload, UploadUploader
+	has_many :uploads
 end

@@ -1,1 +1,62 @@
-<h1>upload start page</h1>
+<div class="content">
+    <h2 style='font-size:36px'>Upload project file</h2>
+    <hr style="width:1210px">
+
+    <%= form_for Upload.new do |f| %>
+        <% if @project.mobile_phase_evaluation %>
+            <% if @project.peak_evaluation %>
+                <h3>Mobile phase & Peak evaluation</h3>
+            <% else %>
+                <h3>Mobile phase evaluation</h3>
+            <% end %>
+            <div>
+                <%= f.label :upload_standard_file %>
+                <%= f.file_field :file %>
+                <br>
+                <br>
+            </div>
+        
+            <div>
+                <%= f.label :upload_sample_file %>
+                <%= f.file_field :file %>
+                <br>
+                <%= f.submit "Upload" %>
+            </div>
+
+        <% else %>
+            <h3>Peak evaluation</h3>
+            <div>
+                <%= f.label :upload_sample_file %>
+                <%= f.file_field :file %>
+                <br>
+                <%= f.submit "Upload" %>
+            </div>
+        <% end %>
+    <% end %>
+
+    <hr style="width:1210px">
+
+    <h3>Uploaded file</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Upload id</th>
+                <th>File name</th>
+                <th>File size</th>
+                <th>Upload time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @project.uploads.each do |upload| %>
+                <tr>
+                    <td><%= upload.id %></td>
+                    <td><%= upload.file.filename %></td>
+                    <td><%= upload.file_size %></td>
+                    <td><%= upload.created_at %></td>
+                <tr>
+            <% end %>    
+        </tbody>
+    </table>
+
+    
+</div>

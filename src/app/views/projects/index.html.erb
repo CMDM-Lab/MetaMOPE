@@ -18,7 +18,7 @@
                         Access_key: <%= project.access_key %>
                         <br>
                         <div class='btn-group'>
-                            <%= link_to 'Select', project_upload_path(project.id), :title => 'Select this project' %>
+                            <%= link_to 'Select', start_upload_path(project.id), :title => 'Select this project' %>
                         </div>
                     </td>
                     <td><%= project.status %></td>

@@ -9,9 +9,13 @@ Rails.application.routes.draw do
  
   root 'home#index'
   
+  
+  get '/uploads/start(/:id)' => 'uploads#start', :as => 'start_upload'
+  post '/uploads/start(/:id)' => 'uploads#create'
+  resources :uploads
+  
   post '/projects/new' => 'projects#create'
   get '/projects/run' => 'projects#run', :as => 'run_project'
-  get '/projects/upload(/:id)' => 'projects#upload', :as => 'project_upload'
   resources :projects
   
 end
