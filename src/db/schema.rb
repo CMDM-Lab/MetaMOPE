@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_24_014202) do
+ActiveRecord::Schema.define(version: 2021_11_25_043519) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -51,6 +51,17 @@ ActiveRecord::Schema.define(version: 2021_11_24_014202) do
     t.boolean "peak_evaluation"
     t.string "access_key"
     t.string "upload"
+    t.integer "mcq_win_size"
+    t.integer "sample_repeat"
+    t.integer "flat_fac"
+    t.integer "mcq_threshold"
+    t.integer "peak_int_threshold"
+    t.integer "std_blk"
+    t.integer "rsd_rt"
+    t.integer "jagedness"
+    t.integer "assy_fac"
+    t.integer "fwhm"
+    t.integer "modality"
   end
 
   create_table "uploads", charset: "utf8mb4", force: :cascade do |t|

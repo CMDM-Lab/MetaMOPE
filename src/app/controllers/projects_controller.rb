@@ -51,13 +51,35 @@ class ProjectsController < ApplicationController
         if params[:id].nil?
             flash[:alert] = 'Please create a project or select a project from Project list to run analyses  (a blue button under the project name)'
             redirect_to projects_path 
-            return
+        return
+        else
+            @project = Project.find(params[:id])
+            if @project.user_id == current_user.id
+                @uploads = @project.uploads
+                return @project
+            else
+				flash[:alert] = 'You have no permission to access this project'
+				redirect_to projects_path
+			end        
         end       
     end
 
+    def retrieve
+		if params[:access_key].nil?
+            flash[:alert] = 'Please create a project or select a project from Project list to retrieve results  (a green button under the project name)'
+            redirect_to projects_path
+            return
+        else
+			@project = Project.where(:access_key => params[:access_key])
+            return @project
+        end
+	end
+
     private
     def project_params
-        params.require(:project).permit(:access_key, :name, :mobile_phase_evaluation, :peak_evaluation, :upload)
+        params.require(:project).permit(:access_key, :name, :mobile_phase_evaluation, :peak_evaluation, :upload,
+                                        :mcq_win_size, :sample_repeat, :flat_fac, :mcq_threshold, :peak_int_threshold, 
+                                        :std_blk, :rsd_rt, :jagedness, :assy_fac, :fwhm, :modality )
     end
 
 end

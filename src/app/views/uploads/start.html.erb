@@ -10,15 +10,22 @@
                 <h3>Mobile phase evaluation</h3>
             <% end %>
             <div>
-                <%= f.label :upload_standard_file %>
-                <%= f.file_field :file %>
+                <%= f.label :upload_grouping_file %>
+                <%= f.file_field :files %>
                 <br>
                 <br>
             </div>
-        
+
             <div>
-                <%= f.label :upload_sample_file %>
-                <%= f.file_field :file %>
+                <%= f.label :upload_standard_file %>
+                <%= f.file_field :files %>
+                <br>
+                <br>
+            </div>
+
+            <div>
+                <%= f.label :upload_mzxml_file %>
+                <%= f.file_field :files %>
                 <br>
                 <%= f.submit "Upload" %>
             </div>
@@ -26,8 +33,20 @@
         <% else %>
             <h3>Peak evaluation</h3>
             <div>
-                <%= f.label :upload_sample_file %>
-                <%= f.file_field :file %>
+                <%= f.label :upload_injection_order_file %>
+                <%= f.file_field :files %>
+                <br>
+                <br>
+            </div>
+            <div>
+                <%= f.label :upload_standard_file %>
+                <%= f.file_field :files %>
+                <br>
+                <br>
+            </div>
+            <div>
+                <%= f.label :upload_mzxml_file %>
+                <%= f.file_field :files %>
                 <br>
                 <%= f.submit "Upload" %>
             </div>
@@ -50,7 +69,7 @@
             <% @project.uploads.each do |upload| %>
                 <tr>
                     <td><%= upload.id %></td>
-                    <td><%= upload.file.filename %></td>
+                    <td><%= upload.files %></td>
                     <td><%= upload.file_size %></td>
                     <td><%= upload.created_at %></td>
                 <tr>

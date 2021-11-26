@@ -1,1 +1,38 @@
-<h3>Run analyses</h3>
+<div class="content">
+    <h2 style="font-size:36px">Run analyses</h2>
+    <div class="alert alert-info" role="alert" style="width:1210px">Please confirm all parameters and uploaded files.</div>
+    <hr style='width:1210px'>
+    <h3>Project parameters</h3>
+    <table class='table'>
+        <thead>
+            <tr>
+                <th style='width:30%'>Parameter</th>
+                <th>Values</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Project name</td><td><%= @project.name %><br><%= @project.access_key %></td></tr>
+            <tr><td>Window size</td><td><%= @project.mcq_win_size %></td></tr>
+            <tr><td>Number of sample reapeats</td><td><%= @project.sample_repeat %></td></tr>
+            <tr><td>Flatness factor</td><td><%= @project.flat_fac %></td></tr>
+            <tr><td>MCQ threshold</td><td><%= @project.mcq_threshold %></td></tr>
+            <tr><td>Peak intensity threshold</td><td><%= @project.peak_int_threshold %></td></tr>
+            <tr><td>std/blk</td><td><%= @project.std_blk %></td></tr>
+            <tr><td>RSD of RT</td><td><%= @project.rsd_rt %></td></tr>
+            <tr><td>Jagedness</td><td><%= @project.jagedness %></td></tr>
+            <tr><td>Assymetric factor</td><td><%= @project.assy_fac %></td></tr>
+            <tr><td>FWHM</td><td><%= @project.fwhm %></td></tr>
+            <tr><td>Modality</td><td><%= @project.modality %></td></tr>
+        </tbody>
+    </table>
+    <h3>Uploaded file</h3>
+    <div class="well">
+        <ol>
+            <% @uploads.each do |u|%>
+            <li><%= u.upload.files %></li>
+            <% end %>
+        </ol>
+    </div>
+    <hr style='width:1210px'>
+    <%= link_to 'Enqueue and run GC2MS', run_project_path(@project), :class => 'btn btn-primary' %>
+</div>

@@ -15,7 +15,8 @@ Rails.application.routes.draw do
   resources :uploads
   
   post '/projects/new' => 'projects#create'
-  get '/projects/run' => 'projects#run', :as => 'run_project'
+  get '/projects/run(/:id)' => 'projects#run', :as => 'run_project'
+  get '/projects/retrieve(/:access_key)' => 'projects#retrieve', :as => 'retrieve_project'
   resources :projects
   
 end

@@ -28,11 +28,11 @@
                             <% if session[:id].nil? %>
                                 <li><%= link_to('Upload samples', start_upload_path, :class => 'fa fa-cloud-upload') %></li>                              
                                 <li><%= link_to('Run analyses', run_project_path, :class => 'fa fa-play-circle') %></li>
-                                <li><a href="/projects/retrieve"><i class="fa fa-cloud-download"></i> Retrieve results</a></li>
+                                <li><%= link_to('Retrive results', retrieve_project_path, :class => 'fa fa-cloud-download') %></li>
                             <% else %>
                                 <li><%= link_to('Upload samples', start_upload_path(session[:id]), :class => 'fa fa-cloud-upload') %></li>                              
                                 <li><%= link_to('Run analyses', run_project_path(session[:id]), :class => 'fa fa-play-circle') %></li>
-                                <li><a href="/projects/retrieve"><i class="fa fa-cloud-download"></i> Retrieve results</a></li>
+                                <li><%= link_to('Retrive results', retrieve_project_path(session[:access_key]), :class => 'fa fa-cloud-download') %></li>
                             <% end %>
                         </ul>    
                         <ul class="nav navbar-nav navbar-right">
