@@ -41,6 +41,8 @@ gem 'rails_admin_toggleable'
 gem 'rails_sortable'
 gem 'sidekiq'
 gem 'sweetify'
+gem 'state_machines'
+gem 'state_machines-activerecord'
 #gem "view_component", require: "view_component/engine"
 
 group :development, :test do

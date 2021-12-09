@@ -22,20 +22,15 @@
                             <%= link_to 'Select', start_upload_path(project.id), :title => 'Select this project' %>
                         </div>
                     </td>
-                    <td><%= project.status %></td>
+                    <td><%= project.state %></td>
                     <td>
                         <ul>
                             <li>Window_size:<%= project.mcq_win_size %></li>
-                            <li>Number_of_sample_repeats:<%= project.sample_repeat %></li>
                             <li>Flatness_factor:<%= project.flat_fac %></li>
                             <li>MCQ_threshold:<%= project.mcq_threshold %></li>
                             <li>Peak_intensity_threshold:<%= project.peak_int_threshold %></li>
                             <li>std_over_blk:<%= project.std_blk %></li>
                             <li>rsd_of_rt:<%= project.rsd_rt %></li>
-                            <li>Jagedness:<%= project.jagedness %></li>
-                            <li>Assymetric_factor:<%= project.assy_fac %></li>
-                            <li>FWHM:<%= project.fwhm %></li>
-                            <li>Modality:<%= project.modality %></li>
                         </ul>
                     </td>
                     <td><%= project.created_at %></td>

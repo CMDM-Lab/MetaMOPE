@@ -15,6 +15,7 @@ class UploadsController < ApplicationController
         @upload = @project.uploads.create(upload_params)
         session[:project_id] = @project.id
         if @upload.save
+            @project.state = "upload"
             redirect_to run_project_path
         end
     end
@@ -32,6 +33,6 @@ class UploadsController < ApplicationController
 
     private
     def upload_params
-        params.require(:upload).permit(files:[])
+        params.require(:upload).permit(:project_id, files:[])
     end
 end

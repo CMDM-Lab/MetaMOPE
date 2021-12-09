@@ -31,10 +31,10 @@
         <div>
             <%= f.label :Services, :class => 'control-label' %>
             <div>
-                <%= f.check_box :mobile_phase_evaluation%>
+                <%= f.check_box :mobile_phase_evaluation, {:id => 'choose'} %>
                 <%= f.label :mobile_phase_evaluation %>
                 <br>
-                <%= f.check_box :peak_evaluation, :id => 'peak'%>
+                <%= f.check_box :peak_evaluation, {:id => 'choose'} %>
                 <%= f.label :peak_evaluation %>
             </div>
         </div>
@@ -43,12 +43,6 @@
             <%= f.label :Window_size_for_MCQ_calculation, :class => 'control-label' %>
                 <div class="controls field">
                     <%= f.text_field :mcq_win_size, :class => 'form-control' %>
-                </div>
-        </div>
-        <div class="control-group omit">        
-            <%= f.label :Number_of_sample_repeats, :class => 'control-label' %>
-                <div class="controls field">
-                    <%= f.text_field :sample_repeat, :class => 'form-control' %>
                 </div>
         </div>
         <div class="control-group omit">        
@@ -81,29 +75,6 @@
                     <%= f.text_field :rsd_rt, :class => 'form-control' %>
                 </div>
         </div>
-        <div class="control-group omit">        
-            <%= f.label :Jagedness, :class => 'control-label' %>
-                <div class="controls field">
-                    <%= f.text_field :jagedness, :class => 'form-control' %>
-                </div>
-        </div>
-        <div class="control-group omit">        
-            <%= f.label :Assymetric_factor, :class => 'control-label' %>
-                <div class="controls field">
-                    <%= f.text_field :assy_fac, :class => 'form-control' %>
-                </div>
-        </div>
-        <div class="control-group omit">        
-            <%= f.label :FWHM, :class => 'control-label' %>
-                <div class="controls field">
-                    <%= f.text_field :fwhm, :class => 'form-control' %>
-                </div>
-        </div><div class="control-group omit">        
-        <%= f.label :Modality, :class => 'control-label' %>
-            <div class="controls field">
-                <%= f.text_field :modality, :class => 'form-control' %>
-            </div>
-        </div>
         
         <hr style="width:1210px">
         <%= f.submit "Create Project" %>
@@ -114,8 +85,8 @@
 
 <script type='text/javascript'>
 $(function(){
-  $('#peak').on('change', function(){
-          if($('#peak').is(':checked')){
+  $('#choose').on('change', function(){
+          if($('#choose').is(':checked')){
                   $('.omit').show();
           }else{
                   $('.omit').hide();

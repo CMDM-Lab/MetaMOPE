@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_25_043519) do
+ActiveRecord::Schema.define(version: 2021_12_06_064636) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_11_25_043519) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name", null: false
-    t.integer "status"
+    t.string "state"
     t.integer "file_size"
     t.integer "user_id"
     t.boolean "mobile_phase_evaluation"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2021_11_25_043519) do
     t.integer "assy_fac"
     t.integer "fwhm"
     t.integer "modality"
+    t.text "output"
   end
 
   create_table "uploads", charset: "utf8mb4", force: :cascade do |t|

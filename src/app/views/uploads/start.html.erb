@@ -11,21 +11,21 @@
             <% end %>
             <div>
                 <%= f.label :upload_grouping_file %>
-                <%= f.file_field :files %>
+                <%= f.file_field :files, multiple: true %>
                 <br>
                 <br>
             </div>
 
             <div>
                 <%= f.label :upload_standard_file %>
-                <%= f.file_field :files %>
+                <%= f.file_field :files, multiple: true %>
                 <br>
                 <br>
             </div>
 
             <div>
                 <%= f.label :upload_mzxml_file %>
-                <%= f.file_field :files %>
+                <%= f.file_field :files, multiple: true %>
                 <br>
                 <%= f.submit "Upload" %>
             </div>
@@ -34,19 +34,19 @@
             <h3>Peak evaluation</h3>
             <div>
                 <%= f.label :upload_injection_order_file %>
-                <%= f.file_field :files %>
+                <%= f.file_field :files, multiple: true %>
                 <br>
                 <br>
             </div>
             <div>
                 <%= f.label :upload_standard_file %>
-                <%= f.file_field :files %>
+                <%= f.file_field :files, multiple: true %>
                 <br>
                 <br>
             </div>
             <div>
                 <%= f.label :upload_mzxml_file %>
-                <%= f.file_field :files %>
+                <%= f.file_field :files, multiple: true %>
                 <br>
                 <%= f.submit "Upload" %>
             </div>
@@ -69,7 +69,13 @@
             <% @project.uploads.each do |upload| %>
                 <tr>
                     <td><%= upload.id %></td>
-                    <td><%= upload.files %></td>
+                    <td>
+                        <ol>
+                            <li><%= upload.files.first.filename%></li>
+                            <li><%= upload.files.second.filename%></li>
+                            <li><%= upload.files.last.filename%></li>
+                        </ol>
+                    </td>
                     <td><%= upload.file_size %></td>
                     <td><%= upload.created_at %></td>
                 <tr>

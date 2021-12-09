@@ -1,6 +1,10 @@
 <div class="content">
-    <h2 style='width:1210px'>Retrieve result</h2>
+    <h2 style='font-size:36px'>Retrieve result</h2>
     <div class="well">
-        <p>The analysis of this project is not finished. Please come back later.</p>
+        <% if @project.last.state?(:finished) %>
+            <%= link_to (fa_icon 'cloud-download 4x', :text => 'Download result'), retrieve_dl_project_path(params[:access_key]) %>
+        <% else %>
+            <p>The analysis of this project is not finished. Please come back later.</p>
+        <% end %>
     </div>
 </div>

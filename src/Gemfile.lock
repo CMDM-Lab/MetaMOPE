@@ -361,6 +361,13 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     ssrf_filter (1.0.7)
+    state_machines (0.5.0)
+    state_machines-activemodel (0.8.0)
+      activemodel (>= 5.1)
+      state_machines (>= 0.5.0)
+    state_machines-activerecord (0.8.0)
+      activerecord (>= 5.1)
+      state_machines-activemodel (>= 0.8.0)
     sweetify (2.0.0)
       actionpack
     sys-uname (1.2.2)
@@ -434,6 +441,8 @@ DEPENDENCIES
   selenium-webdriver
   sidekiq
   spring
+  state_machines
+  state_machines-activerecord
   sweetify
   turbolinks (~> 5)
   tzinfo-data
