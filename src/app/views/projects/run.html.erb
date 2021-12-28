@@ -37,9 +37,13 @@
     <div class="well">
         <ol>
             <% @uploads.each do |u|%>
-            <li><%= u.files.all.first.filename %></li>
-            <li><%= u.files.all.second.filename %></li>
-            <li><%= u.files.all.last.filename %></li>
+                <% if @project.mobile_phase_evaluation %>
+                    <li><%= u.grouping.filename %></li>
+                <% else %>
+                    <li><%= u.injection.filename %></li>
+                <% end %>
+                <li><%= u.standard.filename %></li>
+                <li><%= u.mzxml.filename %></li>
             <% end %>
         </ol>
     </div>

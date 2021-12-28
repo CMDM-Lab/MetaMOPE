@@ -67,19 +67,19 @@ class ProjectsController < ApplicationController
 
     def do_run
         @project = Project.find(params[:id])
-        @upload = Upload.where(:project_id => @project.id)
+        @upload = Upload.find_by(:project_id => @project.id)
         #@project.status = Project::RUN_PENDING
         @project.state = "run_pending"
 		@project.save
         if @project.mobile_phase_evaluation & @project.peak_evaluation
-            RunMobilePhaseEvaluationJob.perform_later(@project.id, @upload.ids)
-            RunPeakEvaluationJob.perform_later(@project.id, @upload.ids)
+            RunMobilePhaseEvaluationJob.perform_now(@project.id, @upload.id)
+            RunPeakEvaluationJob.perform_now(@project.id, @upload.id)
         end
         if @project.mobile_phase_evaluation & !@project.peak_evaluation
-            RunMobilePhaseEvaluationJob.perform_later(@project.id, @upload.ids)
+            RunMobilePhaseEvaluationJob.perform_now(@project.id, @upload.id)
         end
         if @project.peak_evaluation & !@project.mobile_phase_evaluation
-            RunPeakEvaluationJob.perform_later(@project.id, @upload.ids)
+            RunPeakEvaluationJob.perform_now(@project.id, @upload.id)
         end
 
         #if success
@@ -95,7 +95,7 @@ class ProjectsController < ApplicationController
             redirect_to projects_path
             return
         else
-			@project = Project.where(:access_key => params[:access_key])
+			@project = Project.find_by(:access_key => params[:access_key])
             return @project
         end
 	end

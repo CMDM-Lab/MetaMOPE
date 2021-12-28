@@ -46,6 +46,8 @@ services:
       - db
     networks:
       - network
+  r-base:
+    image: 'r-base:4.1.2'
 volumes:
   bundler_gems:
 networks:

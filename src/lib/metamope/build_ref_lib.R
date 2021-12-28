@@ -1,5 +1,5 @@
-setwd("~/Desktop/project/xcms/building_reference_library/")
-options(stringsAsFactors=FALSE)
+#setwd("~/Desktop/project/xcms/building_reference_library/")
+#options(stringsAsFactors=FALSE)
 
 ## library
 library(xcms)

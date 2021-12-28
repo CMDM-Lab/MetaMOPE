@@ -1,6 +1,15 @@
-working_dir <- "~/Desktop/project/xcms/mobile_phase_evaluation/"
-setwd(working_dir)
-options(stringsAsFactors=FALSE)
+#working_dir <- "~/Desktop/project/xcms/mobile_phase_evaluation/"
+#setwd(working_dir)
+#options(stringsAsFactors=FALSE)
+input.arg = commandArgs(TRUE)
+working_dir = input.arg[1]
+grouping_file = input.arg[2]
+standard_file = input.arg[3]
+#mzxml file or directory?
+MCQ_win_size = as.numeric(input.arg[5])
+mcq_threshold = as.numeric(input.arg[6])
+intensity_threshold = as.numeric(input.arg[7])
+#need adjustment to deal with the one with no assigned parameters and use the default value as line 36~38
 
 ## library
 # library(tidyverse)
@@ -11,7 +20,7 @@ options(stringsAsFactors=FALSE)
 
 ## read information of standards
 library(tidyverse)
-standards_file <- "./40StdQC.csv"
+#standards_file <- "./40StdQC.csv"
 standards_raw <- read.csv(standards_file)
 standards_pos <- standards_raw[standards_raw$Ion.Mode == "pos", ] %>% select(-neg_mz) %>% rename(mz=pos_mz)
 standards_neg <- standards_raw[standards_raw$Ion.Mode == "neg", ] %>% select(-pos_mz) %>% rename(mz=neg_mz)
@@ -60,6 +69,3 @@ for (i in 1:mobile_phase_n) {
 }
 source("./source/PeakQualityScore.R")
 getPeakQualityScore(all_AsFs,peak_quality_score_file=paste0(peak_information_dir, "peak_quality_score_table.csv"))
-
-
-

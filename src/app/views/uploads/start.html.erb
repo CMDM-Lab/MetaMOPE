@@ -11,21 +11,21 @@
             <% end %>
             <div>
                 <%= f.label :upload_grouping_file %>
-                <%= f.file_field :files, multiple: true %>
+                <%= f.file_field :grouping %>
                 <br>
                 <br>
             </div>
 
             <div>
                 <%= f.label :upload_standard_file %>
-                <%= f.file_field :files, multiple: true %>
+                <%= f.file_field :standard %>
                 <br>
                 <br>
             </div>
 
             <div>
                 <%= f.label :upload_mzxml_file %>
-                <%= f.file_field :files, multiple: true %>
+                <%= f.file_field :mzxml %>
                 <br>
                 <%= f.submit "Upload" %>
             </div>
@@ -34,19 +34,19 @@
             <h3>Peak evaluation</h3>
             <div>
                 <%= f.label :upload_injection_order_file %>
-                <%= f.file_field :files, multiple: true %>
+                <%= f.file_field :injection %>
                 <br>
                 <br>
             </div>
             <div>
                 <%= f.label :upload_standard_file %>
-                <%= f.file_field :files, multiple: true %>
+                <%= f.file_field :standard %>
                 <br>
                 <br>
             </div>
             <div>
                 <%= f.label :upload_mzxml_file %>
-                <%= f.file_field :files, multiple: true %>
+                <%= f.file_field :mzxml %>
                 <br>
                 <%= f.submit "Upload" %>
             </div>
@@ -71,9 +71,9 @@
                     <td><%= upload.id %></td>
                     <td>
                         <ol>
-                            <li><%= upload.files.first.filename%></li>
-                            <li><%= upload.files.second.filename%></li>
-                            <li><%= upload.files.last.filename%></li>
+                            <li><%= upload.grouping.filename%></li>
+                            <li><%= upload.standard.filename%></li>
+                            <li><%= upload.mzxml.filename%></li>
                         </ol>
                     </td>
                     <td><%= upload.file_size %></td>
