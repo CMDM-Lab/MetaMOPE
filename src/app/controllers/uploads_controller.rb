@@ -33,6 +33,6 @@ class UploadsController < ApplicationController
 
     private
     def upload_params
-        params.require(:upload).permit(:project_id, :grouping, :injection, :standard, :mzxml)
+        params.require(:upload).permit(:project_id, :grouping, :injection, :standard, :mzxml, :mobile_phase)
     end
 end

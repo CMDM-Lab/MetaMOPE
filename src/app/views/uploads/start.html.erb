@@ -2,55 +2,83 @@
     <h2 style='font-size:36px'>Upload project file</h2>
     <hr style="width:1210px">
 
-    <%= form_for Upload.new do |f| %>
-        <% if @project.mobile_phase_evaluation %>
-            <% if @project.peak_evaluation %>
-                <h3>Mobile phase & Peak evaluation</h3>
-            <% else %>
+    <%= nested_form_for(@project) do |f| %>
+        <%= f.fields_for :uploads do |u| %>
+            <% if @project.mobile_phase_evaluation %>
                 <h3>Mobile phase evaluation</h3>
+
+                <div>
+                    <%= u.label :upload_grouping_file %>
+                    <%= u.file_field :grouping %>
+                    <br>
+                    <br>
+                </div>
+
+                <div>
+                    <%= u.label :upload_standard_file %>
+                    <%= u.file_field :standard %>
+                    <br>
+                    <br>
+                </div>
+
+                <div>
+                    <%= u.label :mobile_phase %>
+                    <%= u.text_field :mobile_phase %>
+                </div>
+
+                <div>
+                    <%= u.label :upload_mzxml_files %>
+                    <%= u.file_field :mzxml %>
+                    <br>
+                </div>
+
+                <div>
+                    <%= u.submit "Upload" %>
+                </div>
+                
+                <%= u.link_to_remove "Remove this upload" %>
+
             <% end %>
-            <div>
-                <%= f.label :upload_grouping_file %>
-                <%= f.file_field :grouping %>
-                <br>
-                <br>
-            </div>
+            
+            <% if @project.peak_evaluation %>
+                <h3>Peak evaluation</h3>
 
-            <div>
-                <%= f.label :upload_standard_file %>
-                <%= f.file_field :standard %>
-                <br>
-                <br>
-            </div>
+                <div>
+                    <%= u.label :upload_injection_order_file %>
+                    <%= u.file_field :injection %>
+                    <br>
+                    <br>
+                </div>
 
-            <div>
-                <%= f.label :upload_mzxml_file %>
-                <%= f.file_field :mzxml %>
-                <br>
-                <%= f.submit "Upload" %>
-            </div>
+                <div>
+                    <%= u.label :upload_standard_file %>
+                    <%= u.file_field :standard %>
+                    <br>
+                    <br>
+                </div>
 
-        <% else %>
-            <h3>Peak evaluation</h3>
-            <div>
-                <%= f.label :upload_injection_order_file %>
-                <%= f.file_field :injection %>
-                <br>
-                <br>
-            </div>
-            <div>
-                <%= f.label :upload_standard_file %>
-                <%= f.file_field :standard %>
-                <br>
-                <br>
-            </div>
-            <div>
-                <%= f.label :upload_mzxml_file %>
-                <%= f.file_field :mzxml %>
-                <br>
-                <%= f.submit "Upload" %>
-            </div>
+                <div>
+                    <%= u.label :mobile_phase %>
+                    <%= u.text_field :mobile_phase %>
+                </div>
+
+                <div>
+                    <%= u.label :upload_mzxml_files %>
+                    <%= u.file_field :mzxml %>
+                    <br>
+                </div>
+
+                <div>
+                    <%= u.submit "Upload" %>
+                </div>
+                
+                <%= u.link_to_remove "Remove this upload" %>
+
+            <% end %>
+    
         <% end %>
+        <%= f.link_to_add "New upload", :uploads %>
+    
     <% end %>
 
     <hr style="width:1210px">
@@ -59,7 +87,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Upload id</th>
+                <th>Mobile phase</th>
                 <th>File name</th>
                 <th>File size</th>
                 <th>Upload time</th>
@@ -68,7 +96,7 @@
         <tbody>
             <% @project.uploads.each do |upload| %>
                 <tr>
-                    <td><%= upload.id %></td>
+                    <td><%= upload.mobile_phase %></td>
                     <td>
                         <ol>
                             <li><%= upload.grouping.filename%></li>

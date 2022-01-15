@@ -11,6 +11,8 @@ mcq_threshold = as.numeric(input.arg[6])
 intensity_threshold = as.numeric(input.arg[7])
 #need adjustment to deal with the one with no assigned parameters and use the default value as line 36~38
 
+setwd(working_dir)
+
 ## library
 # library(tidyverse)
 

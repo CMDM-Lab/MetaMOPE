@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_06_064636) do
+ActiveRecord::Schema.define(version: 2022_01_05_022109) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2021_12_06_064636) do
     t.string "file"
     t.integer "file_size"
     t.integer "project_id"
+    t.string "mobile_phase"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|

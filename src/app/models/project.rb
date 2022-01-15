@@ -3,6 +3,10 @@ class Project < ApplicationRecord
     belongs_to :user
 	has_many :uploads
 
+	accepts_nested_attributes_for :uploads,
+		:allow_destroy => true,
+		:reject_if => :all_blank
+
 	#state_machine :initial => :new do
 		
 	#	event :upload do
