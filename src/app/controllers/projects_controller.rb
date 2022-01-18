@@ -48,6 +48,13 @@ class ProjectsController < ApplicationController
         end       
     end
 
+    def update 
+        @project = Project.find(params[:id])
+        if @project.update(project_params)
+            redirect_to projects_path
+        end
+    end
+
     def run
         if params[:id].nil?
             flash[:alert] = 'Please create a project or select a project from Project list to run analyses  (a blue button under the project name)'
@@ -116,8 +123,9 @@ class ProjectsController < ApplicationController
     private
     def project_params
         params.require(:project).permit(:access_key, :name, :mobile_phase_evaluation, :peak_evaluation, :state, :upload,
+                                        :grouping, :injection, :standard,
                                         :mcq_win_size, :flat_fac, :mcq_threshold, :peak_int_threshold, 
-                                        :std_blk, :rsd_rt, :output, :uploads_attributes => [:id, :grouping, :injection, :standard, :mzxml, :mobile_phase, :_destroy])
+                                        :std_blk, :rsd_rt, :output, :uploads_attributes => [:id, :mobile_phase, :_destroy, mzxml: []])
     end
 
 end

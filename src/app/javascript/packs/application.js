@@ -13,4 +13,4 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-//= require jquery_nested_form
+require('./nested_form./addFields')

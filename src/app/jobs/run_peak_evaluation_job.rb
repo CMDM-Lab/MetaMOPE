@@ -8,9 +8,9 @@ class RunPeakEvaluationJob < ApplicationJob
     @project.save
     #ProjectMailer.notify_progress(@project.user.id, @project.id, Project::RUNNING).deliver_now
     metomope_peak_evaluation = Rails.root.join('lib', 'metamope','build_ref_lib.R')
-    injection_order_file = @upload.injection
-    standard_file = @upload.standard
-    mzxml_file = @upload.mzxml
+    injection_order_file = @project.injection
+    standard_file = @project.standard
+    mzxml_file = @upload.mzxmls
     mcq_win_size = @project.mcq_win_size
     mcq_threshold = @project.mcq_threshold
     intensity_threshold = @project.peak_int_threshold

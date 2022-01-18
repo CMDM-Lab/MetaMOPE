@@ -1,83 +1,100 @@
+<%= javascript_pack_tag :application, 'nested_form' %>
 <div class="content">
     <h2 style='font-size:36px'>Upload project file</h2>
     <hr style="width:1210px">
 
     <%= nested_form_for(@project) do |f| %>
-        <%= f.fields_for :uploads do |u| %>
-            <% if @project.mobile_phase_evaluation %>
-                <h3>Mobile phase evaluation</h3>
 
-                <div>
-                    <%= u.label :upload_grouping_file %>
-                    <%= u.file_field :grouping %>
-                    <br>
-                    <br>
-                </div>
+        <% if @project.mobile_phase_evaluation %>
+            <h3>Mobile phase evaluation</h3>
 
-                <div>
-                    <%= u.label :upload_standard_file %>
-                    <%= u.file_field :standard %>
-                    <br>
-                    <br>
-                </div>
+            <div>
+                <%= f.label :upload_grouping_file %>
+                <%= f.file_field :grouping %>
+                <br>
+                <br>
+            </div>
 
-                <div>
-                    <%= u.label :mobile_phase %>
-                    <%= u.text_field :mobile_phase %>
-                </div>
+            <div>
+                <%= f.label :upload_standard_file %>
+                <%= f.file_field :standard %>
+                <br>
+                <br>
+            </div>
 
-                <div>
-                    <%= u.label :upload_mzxml_files %>
-                    <%= u.file_field :mzxml %>
-                    <br>
-                </div>
+            <hr style="width:1210px">
 
-                <div>
-                    <%= u.submit "Upload" %>
-                </div>
-                
-                <%= u.link_to_remove "Remove this upload" %>
-
-            <% end %>
-            
-            <% if @project.peak_evaluation %>
-                <h3>Peak evaluation</h3>
-
-                <div>
-                    <%= u.label :upload_injection_order_file %>
-                    <%= u.file_field :injection %>
-                    <br>
-                    <br>
-                </div>
-
-                <div>
-                    <%= u.label :upload_standard_file %>
-                    <%= u.file_field :standard %>
-                    <br>
-                    <br>
-                </div>
-
+            <%= f.fields_for :uploads do |u| %>
                 <div>
                     <%= u.label :mobile_phase %>
                     <%= u.text_field :mobile_phase %>
+                    <br>
+                    <br>
                 </div>
-
+    
                 <div>
                     <%= u.label :upload_mzxml_files %>
-                    <%= u.file_field :mzxml %>
+                    <%= u.file_field :mzxmls %>
+                    <br>
                     <br>
                 </div>
 
-                <div>
-                    <%= u.submit "Upload" %>
-                </div>
-                
-                <%= u.link_to_remove "Remove this upload" %>
-
+                <hr style="width:1210px">
+        
             <% end %>
     
+            <%= f.link_to_add "New upload", :uploads %>
+
+            <div>
+                <%= f.submit "Upload" %>
+            </div>
+
         <% end %>
-        <%= f.link_to_add "New upload", :uploads %>
+
+        <% if @project.peak_evaluation %>
+            <h3>Peak evaluation</h3>
+
+            <div>
+                <%= f.label :upload_injection_order_file %>
+                <%= f.file_field :injection %>
+                <br>
+                <br>
+            </div>
+
+            <div>
+                <%= f.label :upload_standard_file %>
+                <%= f.file_field :standard %>
+                <br>
+                <br>
+            </div>
+
+            <hr style="width:1210px">
+
+            <%= f.fields_for :uploads do |u| %>
+                <div>
+                    <%= u.label :mobile_phase %>
+                    <%= u.text_field :mobile_phase %>
+                    <br>
+                    <br>
+                </div>
+    
+                <div>
+                    <%= u.label :upload_mzxml_files %>
+                    <%= u.file_field :mzxmls %>
+                    <br>
+                </div>
+
+                <hr style="width:1210px">
+        
+            <% end %>
+    
+            <%= f.link_to_add "New upload", :uploads %>
+
+            <div>
+                <%= f.submit "Upload" %>
+            </div>
+
+        <% end %>
     
     <% end %>
 
@@ -87,6 +104,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th>Project file</th>
                 <th>Mobile phase</th>
                 <th>File name</th>
                 <th>File size</th>
@@ -94,20 +112,25 @@
             </tr>
         </thead>
         <tbody>
-            <% @project.uploads.each do |upload| %>
-                <tr>
+            <tr>
+                <td>
+                    <ol>
+                        <% if @project.mobile_phase_evaluation %>
+                            <li><%= @project.grouping.filename %></li>
+                        <% end %>
+                        <% if @project.peak_evaluation %>
+                            <li><%= @project.injection.filename %><li>
+                        <% end %>
+                        <li><%= @project.standard.filename %><li>
+                    </ol>
+                </td>
+                <% @project.uploads.each do |upload| %>
                     <td><%= upload.mobile_phase %></td>
-                    <td>
-                        <ol>
-                            <li><%= upload.grouping.filename%></li>
-                            <li><%= upload.standard.filename%></li>
-                            <li><%= upload.mzxml.filename%></li>
-                        </ol>
-                    </td>
+                    <td><%= upload.mzxmls.filename %></td>
                     <td><%= upload.file_size %></td>
                     <td><%= upload.created_at %></td>
-                <tr>
-            <% end %>    
+                <% end %>
+            </tr>    
         </tbody>
     </table>
 

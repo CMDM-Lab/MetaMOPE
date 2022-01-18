@@ -8,9 +8,9 @@ class RunMobilePhaseEvaluationJob < ApplicationJob
     @project.save
     #ProjectMailer.notify_progress(@project.user.id, @project.id, Project::RUNNING).deliver_now
     metamope_mobile_phase_evaluation = Rails.root.join('lib','metamope','mobile_phase_evaluation.R')
-    grouping_file = @upload.grouping
-    standard_file = @upload.standard
-    mzxml_file = @upload.mzxml
+    grouping_file = @project.grouping
+    standard_file = @project.standard
+    mzxml_file = @upload.mzxmls
     mcq_win_size = @project.mcq_win_size
     mcq_threshold = @project.mcq_threshold
     intensity_threshold = @project.peak_int_threshold

@@ -3,6 +3,10 @@ class Project < ApplicationRecord
     belongs_to :user
 	has_many :uploads
 
+	has_one_attached :grouping
+	has_one_attached :injection
+	has_one_attached :standard
+
 	accepts_nested_attributes_for :uploads,
 		:allow_destroy => true,
 		:reject_if => :all_blank
