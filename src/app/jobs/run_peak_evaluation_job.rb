@@ -1,9 +1,9 @@
 class RunPeakEvaluationJob < ApplicationJob
   queue_as :default
 
-  def perform(project_id, upload_id)
+  def perform(project_id)
     @project = Project.find(project_id)
-    @upload = Upload.find(upload_id)
+    @upload = Upload.find_by(:project_id => @project.id)
     @project.state = "running"
     @project.save
     #ProjectMailer.notify_progress(@project.user.id, @project.id, Project::RUNNING).deliver_now

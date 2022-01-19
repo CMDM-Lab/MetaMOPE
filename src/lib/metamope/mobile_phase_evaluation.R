@@ -5,10 +5,10 @@ input.arg = commandArgs(TRUE)
 working_dir = input.arg[1]
 grouping_file = input.arg[2]
 standard_file = input.arg[3]
-#mzxml file or directory?
-MCQ_win_size = as.numeric(input.arg[5])
-mcq_threshold = as.numeric(input.arg[6])
-intensity_threshold = as.numeric(input.arg[7])
+mobile_phases = input.arg[4]
+MCQ_win_size = as.numeric(input.arg[6])
+mcq_threshold = as.numeric(input.arg[7])
+intensity_threshold = as.numeric(input.arg[8])
 #need adjustment to deal with the one with no assigned parameters and use the default value as line 36~38
 
 setwd(working_dir)
@@ -28,9 +28,9 @@ standards_pos <- standards_raw[standards_raw$Ion.Mode == "pos", ] %>% select(-ne
 standards_neg <- standards_raw[standards_raw$Ion.Mode == "neg", ] %>% select(-pos_mz) %>% rename(mz=neg_mz)
 
 ## peak information of a mobile phase
-mzXML_dir <- "./mzXML/"
+#mzXML_dir <- "./mzXML/"
 peak_information_dir <- "./peak_information/"
-mobile_phases <- list.files(mzXML_dir)
+#mobile_phases <- list.files(mzXML_dir)
 mobile_phase_n <- length(mobile_phases)
 EIC_ppm_tolerance <- matrix(0, mobile_phase_n, 2, dimnames=list(mobile_phases, c("pos", "neg")))
 EIC_ppm_tolerance[1, 1:2] <- 10
@@ -40,17 +40,18 @@ mcq_threshold <- 0.9
 intensity_threshold <- 5000
 
 source("./source/PeakInformation.R")
-for (mobile_phase in mobile_phases) {
+#for (mobile_phase in mobile_phases) {
+for (i in 1:mobile_phase_n)
   for (mode in c("pos", "neg")) {
     standards <- switch(mode, pos=standards_pos, neg=standards_neg)
-    mzXML_file <- list.files(paste0(mzXML_dir, mobile_phase), pattern=paste0("*_", mode, "\\.mzXML"))
+    mzXML_file <- list.files(paste0(mzXML_dir, mobile_phases[i]), pattern=paste0("*_", mode, "\\.mzXML"))
     peak_information_file <- sub("\\.mzXML", "_peak_information.csv", mzXML_file)
     getPeakInformation(standards=standards,
-                       mzXML_file=paste0(mzXML_dir, mobile_phase, "/", mzXML_file),
-                       peak_information_file=paste0(peak_information_dir, mobile_phase, "/", peak_information_file), 
+                       mzXML_file=paste0(mzXML_dir, mobile_phases[i], "/", mzXML_file),
+                       peak_information_file=paste0(peak_information_dir, mobile_phases[i], "/", peak_information_file), 
                        mcq_threshold=mcq_threshold, 
                        intensity_threshold=intensity_threshold, 
-                       EIC_ppm_tolerance=EIC_ppm_tolerance[mobile_phase, mode], 
+                       EIC_ppm_tolerance=EIC_ppm_tolerance[mobile_phases[i], mode], 
                        MCQ_win_size=MCQ_win_size)
   }
 }

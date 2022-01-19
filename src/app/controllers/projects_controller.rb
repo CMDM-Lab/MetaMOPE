@@ -74,26 +74,24 @@ class ProjectsController < ApplicationController
 
     def do_run
         @project = Project.find(params[:id])
-        @upload = Upload.find_by(:project_id => @project.id)
         #@project.status = Project::RUN_PENDING
         @project.state = "run_pending"
 		@project.save
         if @project.mobile_phase_evaluation & @project.peak_evaluation
-            RunMobilePhaseEvaluationJob.perform_now(@project.id, @upload.id)
-            RunPeakEvaluationJob.perform_now(@project.id, @upload.id)
+            RunMobilePhaseEvaluationJob.perform_now(@project.id)
+            RunPeakEvaluationJob.perform_now(@project.id)
         end
         if @project.mobile_phase_evaluation & !@project.peak_evaluation
-            RunMobilePhaseEvaluationJob.perform_now(@project.id, @upload.id)
+            RunMobilePhaseEvaluationJob.perform_now(@project.id)
         end
         if @project.peak_evaluation & !@project.mobile_phase_evaluation
-            RunPeakEvaluationJob.perform_now(@project.id, @upload.id)
+            RunPeakEvaluationJob.perform_now(@project.id)
         end
 
         #if success
 		flash[:notice] = "Your project #{@project.name} has been enqueued. "
 		#ProjectMailer.notify_progress(@project.user.id, @project.id, Project::RUN_PENDING).deliver_now
 		redirect_to projects_path
-
 	end
 
     def retrieve

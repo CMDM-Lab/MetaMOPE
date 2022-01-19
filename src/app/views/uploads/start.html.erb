@@ -7,21 +7,6 @@
 
         <% if @project.mobile_phase_evaluation %>
             <h3>Mobile phase evaluation</h3>
-
-            <div>
-                <%= f.label :upload_grouping_file %>
-                <%= f.file_field :grouping %>
-                <br>
-                <br>
-            </div>
-
-            <div>
-                <%= f.label :upload_standard_file %>
-                <%= f.file_field :standard %>
-                <br>
-                <br>
-            </div>
-
             <hr style="width:1210px">
 
             <%= f.fields_for :uploads do |u| %>
@@ -53,22 +38,6 @@
 
         <% if @project.peak_evaluation %>
             <h3>Peak evaluation</h3>
-
-            <div>
-                <%= f.label :upload_injection_order_file %>
-                <%= f.file_field :injection %>
-                <br>
-                <br>
-            </div>
-
-            <div>
-                <%= f.label :upload_standard_file %>
-                <%= f.file_field :standard %>
-                <br>
-                <br>
-            </div>
-
-            <hr style="width:1210px">
 
             <%= f.fields_for :uploads do |u| %>
                 <div>

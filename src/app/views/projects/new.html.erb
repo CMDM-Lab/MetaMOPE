@@ -1,3 +1,4 @@
+<%= javascript_pack_tag :application, 'service_form' %>
 <div class="content">
     <h2 style="font-size:36px">New project</h2>
     <hr style="width:1210px">
@@ -31,10 +32,10 @@
         <div>
             <%= f.label :Services, :class => 'control-label' %>
             <div>
-                <%= f.check_box :mobile_phase_evaluation, {:id => 'choose'} %>
+                <%= f.check_box :mobile_phase_evaluation, {:id => 'mobile'} %>
                 <%= f.label :mobile_phase_evaluation %>
                 <br>
-                <%= f.check_box :peak_evaluation, {:id => 'choose'} %>
+                <%= f.check_box :peak_evaluation, {:id => 'peak'} %>
                 <%= f.label :peak_evaluation %>
             </div>
         </div>
@@ -75,20 +76,34 @@
                     <%= f.text_field :rsd_rt, :class => 'form-control' %>
                 </div>
         </div>
-        
+        <hr style="width:1210px">
+
+        <div class="control-group">
+                <div class="omit">
+                    <%= f.label :upload_grouping_file %>
+                    <%= f.file_field :grouping %>
+                    <br>
+                    <br>
+                </div>
+
+                <div class="ref">
+                    <%= f.label :upload_injection_order_file %>
+                    <%= f.file_field :injection %>
+                    <br>
+                    <br>
+                </div>
+
+                <div>
+                    <%= f.label :upload_standard_file %>
+                    <%= f.file_field :standard %>
+                    <br>
+                    <br>
+                </div>
+        </div>
+
         <hr style="width:1210px">
         <%= f.submit "Create Project" %>
         
     <% end %>
     
 </div>
-
-<script type='text/javascript'>
-$(function(){
-  $('#choose').on('change', function(){
-          if($('#choose').is(':checked')){
-                  $('.omit').show();
-          }else{
-                  $('.omit').hide();
-          }
-  });

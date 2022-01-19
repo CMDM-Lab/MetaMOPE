@@ -14,3 +14,4 @@ Turbolinks.start()
 ActiveStorage.start()
 
 require('./nested_form./addFields')
+require('./service_form')
