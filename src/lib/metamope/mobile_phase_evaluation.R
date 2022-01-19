@@ -6,6 +6,7 @@ working_dir = input.arg[1]
 grouping_file = input.arg[2]
 standard_file = input.arg[3]
 mobile_phases = input.arg[4]
+mzxml_files = input.arg[5]
 MCQ_win_size = as.numeric(input.arg[6])
 mcq_threshold = as.numeric(input.arg[7])
 intensity_threshold = as.numeric(input.arg[8])
@@ -44,10 +45,12 @@ source("./source/PeakInformation.R")
 for (i in 1:mobile_phase_n)
   for (mode in c("pos", "neg")) {
     standards <- switch(mode, pos=standards_pos, neg=standards_neg)
-    mzXML_file <- list.files(paste0(mzXML_dir, mobile_phases[i]), pattern=paste0("*_", mode, "\\.mzXML"))
+    #mzXML_file <- list.files(paste0(mzXML_dir, mobile_phases[i]), pattern=paste0("*_", mode, "\\.mzXML"))
+    mzXML_file <- list.mzxml_files(pattern=paste0("*_", mode, "\\.mzXML"))
     peak_information_file <- sub("\\.mzXML", "_peak_information.csv", mzXML_file)
     getPeakInformation(standards=standards,
-                       mzXML_file=paste0(mzXML_dir, mobile_phases[i], "/", mzXML_file),
+                       #mzXML_file=paste0(mzXML_dir, mobile_phases[i], "/", mzXML_file),
+                       mzXML_file=mzXML_file
                        peak_information_file=paste0(peak_information_dir, mobile_phases[i], "/", peak_information_file), 
                        mcq_threshold=mcq_threshold, 
                        intensity_threshold=intensity_threshold, 
