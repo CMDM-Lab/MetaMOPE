@@ -2,7 +2,7 @@
     <h2 style="font-size:36px">Set parameters</h2>
     <hr style="width:1210px">
 
-    <%= form_for(@project, :html => { :class => "form-horizontal project" }) do |f| %>
+    <%= form_for(@project, :url => { :controller => 'projects', :action => 'update', :id => @project}, :html => { :class => "form-horizontal project" }) do |f| %>
         <% if @project.errors.any? %>
             <div id="error_expl" class="panel panel-danger">
                 <div class="panel-heading">
@@ -126,6 +126,8 @@
             <% end %>
 
         </div>
+        <hr style="width:1210px">
+        <%= f.submit "Update" %>
 
     <% end %>
 

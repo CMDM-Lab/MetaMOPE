@@ -48,22 +48,15 @@ class ProjectsController < ApplicationController
         end       
     end
 
+    def edit
+        @project = Project.find(params[:id])
+    end
+
     def update 
-        if params[:id].nil?
-            flash[:alert] = 'Please create a project or select a project from Project list to upload your data (a blue button under the project name)'
-  	        redirect_to projects_path
-  		return
-        else
-            @project = Project.find(params[:id])
-            if @project.user_id == current_user.id
-                #@project.status = Project::UPLOAD
-                session[:access_key] = @project.access_key
-                @project.save 
-            else    
-                flash[:alert] = "You have no permission to upload files to this project."
-                redirect_to root_path  
-            end
-        end
+        @project = Project.find(params[:id])
+        @project.update(project_params)
+        flash[:notice] = "Project has been updated."
+        redirect_to projects_path  
     end
 
     def run
