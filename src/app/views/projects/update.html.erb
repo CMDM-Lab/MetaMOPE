@@ -1,0 +1,132 @@
+<div class='content'>
+    <h2 style="font-size:36px">Set parameters</h2>
+    <hr style="width:1210px">
+
+    <%= form_for(@project, :html => { :class => "form-horizontal project" }) do |f| %>
+        <% if @project.errors.any? %>
+            <div id="error_expl" class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <% @project.errors.full_messages.each do |msg| %>
+                            <li><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+            </div> 
+        <% end %>
+
+        <div class="control-group">
+            <% if @project.mobile_phase_evaluation %>
+                <div class="control-group">
+                    <%= f.label :Window_size_for_MCQ_calculation, :class => 'control-label' %>
+                    <div class="controls field">
+                        <%= f.text_field :mcq_win_size, :class => 'form-control' %>
+                    </div>
+                </div>
+
+                <div class="control-group">        
+                    <%= f.label :MCQ_threshold, :class => 'control-label' %>
+                    <div class="controls field">
+                        <%= f.text_field :mcq_threshold, :class => 'form-control' %>
+                    </div>
+                </div>
+
+                <div class="control-group">        
+                    <%= f.label :Peak_intensity_threshold, :class => 'control-label' %>
+                        <div class="controls field">
+                            <%= f.text_field :peak_int_threshold, :class => 'form-control' %>
+                        </div>
+                </div>
+                <hr style="width:1210px">
+
+                <div class="control-group">
+                    <div class="omit">
+                        <%= f.label :upload_grouping_file %>
+                        <%= f.file_field :grouping %>
+                        <br>
+                        <br>
+                    </div>
+
+                    <div>
+                        <%= f.label :upload_standard_file %>
+                        <%= f.file_field :standard %>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+
+            <% end %>
+            
+            <% if @project.peak_evaluation %>
+                <div class="control-group">
+                    <%= f.label :Window_size_for_MCQ_calculation, :class => 'control-label' %>
+                    <div class="controls field">
+                        <%= f.text_field :mcq_win_size, :class => 'form-control' %>
+                    </div>
+                </div>
+
+                <div class="control-group omit">        
+                    <%= f.label :Flatness_factor, :class => 'control-label' %>
+                        <div class="controls field">
+                            <%= f.text_field :flat_fac, :class => 'form-control' %>
+                        </div>
+                </div>
+
+                <div class="control-group">        
+                    <%= f.label :MCQ_threshold, :class => 'control-label' %>
+                    <div class="controls field">
+                        <%= f.text_field :mcq_threshold, :class => 'form-control' %>
+                    </div>
+                </div>
+
+                <div class="control-group">        
+                    <%= f.label :Peak_intensity_threshold, :class => 'control-label' %>
+                        <div class="controls field">
+                            <%= f.text_field :peak_int_threshold, :class => 'form-control' %>
+                        </div>
+                </div>
+
+                <div class="control-group omit">        
+                    <%= f.label :std_over_blk, :class => 'control-label' %>
+                        <div class="controls field">
+                            <%= f.text_field :std_blk, :class => 'form-control' %>
+                        </div>
+                </div>
+                <div class="control-group omit">        
+                    <%= f.label :RSD_of_rt, :class => 'control-label' %>
+                        <div class="controls field">
+                            <%= f.text_field :rsd_rt, :class => 'form-control' %>
+                        </div>
+                </div>
+                <hr style="width:1210px">
+
+                <div class="control-group">
+
+                    <div class="ref">
+                        <%= f.label :upload_injection_order_file %>
+                        <%= f.file_field :injection %>
+                        <br>
+                        <br>
+                    </div>
+
+                    <div>
+                        <%= f.label :upload_standard_file %>
+                        <%= f.file_field :standard %>
+                        <br>
+                        <br>
+                    </div>
+
+                </div>
+
+            <% end %>
+
+        </div>
+
+    <% end %>
+
+</div>

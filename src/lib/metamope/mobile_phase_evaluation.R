@@ -42,7 +42,7 @@ intensity_threshold <- 5000
 
 source("./source/PeakInformation.R")
 #for (mobile_phase in mobile_phases) {
-for (i in 1:mobile_phase_n)
+for (i in 1:mobile_phase_n){
   for (mode in c("pos", "neg")) {
     standards <- switch(mode, pos=standards_pos, neg=standards_neg)
     #mzXML_file <- list.files(paste0(mzXML_dir, mobile_phases[i]), pattern=paste0("*_", mode, "\\.mzXML"))

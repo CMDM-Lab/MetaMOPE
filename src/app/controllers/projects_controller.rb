@@ -49,9 +49,20 @@ class ProjectsController < ApplicationController
     end
 
     def update 
-        @project = Project.find(params[:id])
-        if @project.update(project_params)
-            redirect_to projects_path
+        if params[:id].nil?
+            flash[:alert] = 'Please create a project or select a project from Project list to upload your data (a blue button under the project name)'
+  	        redirect_to projects_path
+  		return
+        else
+            @project = Project.find(params[:id])
+            if @project.user_id == current_user.id
+                #@project.status = Project::UPLOAD
+                session[:access_key] = @project.access_key
+                @project.save 
+            else    
+                flash[:alert] = "You have no permission to upload files to this project."
+                redirect_to root_path  
+            end
         end
     end
 
@@ -114,7 +125,7 @@ class ProjectsController < ApplicationController
             access = params[:access_key]
             @project = Project.where(:access_key => params[:access_key])
             project_id = @project.id
-            #send_file{"tmp/metamope/projects/#{project_id}/Result.zip", filename: access, type: "applcation/zip"}
+            send_file("tmp/metamope/projects/#{project_id}/Result.zip", filename: access, type: "applcation/zip")
         end
     end
 
@@ -123,7 +134,7 @@ class ProjectsController < ApplicationController
         params.require(:project).permit(:access_key, :name, :mobile_phase_evaluation, :peak_evaluation, :state, :upload,
                                         :grouping, :injection, :standard,
                                         :mcq_win_size, :flat_fac, :mcq_threshold, :peak_int_threshold, 
-                                        :std_blk, :rsd_rt, :output, :uploads_attributes => [:id, :mobile_phase, :_destroy, mzxml: []])
+                                        :std_blk, :rsd_rt, :output, :uploads_attributes => [:id, :mobile_phase, :_destroy, mzxmls: []])
     end
 
 end

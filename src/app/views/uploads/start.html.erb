@@ -19,7 +19,7 @@
     
                 <div>
                     <%= u.label :upload_mzxml_files %>
-                    <%= u.file_field :mzxmls %>
+                    <%= u.file_field :mzxmls, multiple: true, name: "attachment[file][]" %>
                     <br>
                     <br>
                 </div>
@@ -49,7 +49,7 @@
     
                 <div>
                     <%= u.label :upload_mzxml_files %>
-                    <%= u.file_field :mzxmls %>
+                    <%= u.file_field :mzxmls, multiple: true, name: "attachment[file][]" %>
                     <br>
                 </div>
 

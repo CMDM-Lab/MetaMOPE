@@ -26,10 +26,12 @@
                         <ul class="nav navbar-nav ">
                             <li><a href="/projects/new"><i class="fa fa-plus-circle"></i> Create a project</a></li>
                             <% if session[:id].nil? %>
+                                <li><%= link_to('Set parameters', project_update_path, :class => 'fa') %></li>
                                 <li><%= link_to('Upload samples', start_upload_path, :class => 'fa fa-cloud-upload') %></li>                              
                                 <li><%= link_to('Run analyses', run_project_path, :class => 'fa fa-play-circle') %></li>
                                 <li><%= link_to('Retrive results', retrieve_project_path, :class => 'fa fa-cloud-download') %></li>
                             <% else %>
+                                <li><%= link_to('Set parameters', project_update_path(session[:id]), :class => 'fa') %></li>
                                 <li><%= link_to('Upload samples', start_upload_path(session[:id]), :class => 'fa fa-cloud-upload') %></li>                              
                                 <li><%= link_to('Run analyses', run_project_path(session[:id]), :class => 'fa fa-play-circle') %></li>
                                 <li><%= link_to('Retrive results', retrieve_project_path(session[:access_key]), :class => 'fa fa-cloud-download') %></li>

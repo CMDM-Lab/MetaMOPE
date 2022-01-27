@@ -3,7 +3,6 @@ class RunMobilePhaseEvaluationJob < ApplicationJob
 
   def perform(project_id)
     @project = Project.find(project_id)
-    @upload = Upload.find_by(:project_id => @project.id)
     @project.state = "running"
     @project.save
     #ProjectMailer.notify_progress(@project.user.id, @project.id, Project::RUNNING).deliver_now

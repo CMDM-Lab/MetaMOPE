@@ -37,9 +37,9 @@ standards_file <- "./HILIC_library/algo_CODA90_pos_A190.csv"
 # standards_file <- "./HILIC_library/stdlib_HILIC_v5.csv"
 standards_raw <- read.csv(standards_file)
 ## ./HILIC_library/algo_CODA90_pos_A190.csv invalid name
-standards_raw$analyte[58] <- "pos_seq119_C0598_TG_mz555.462"
-standards_raw$analyte[229] <- "pos_seq451_C0619_PC_mz734.569"
-standards_raw$analyte[239] <- "pos_seq470_C0620_PS_mz736.512"
+#standards_raw$analyte[58] <- "pos_seq119_C0598_TG_mz555.462"
+#standards_raw$analyte[229] <- "pos_seq451_C0619_PC_mz734.569"
+#standards_raw$analyte[239] <- "pos_seq470_C0620_PS_mz736.512"
 ## ./HILIC_library/algo_CODA90_neg_A190.csv invalid name
 # standards_raw$analyte[177] <- "neg_seq470_C0620_PS_mz734.498"
 standards_raw$Name <- sapply(standards_raw$analyte, function(x) unlist(strsplit(x, "_"))[4])
@@ -47,8 +47,8 @@ standards_raw$mz <- sapply(standards_raw$analyte, function(x) as.numeric(unlist(
 # standards_raw$Name <- standards$Compound.Name
 
 ## Mapping
-mapping_file <- "./HILIC_library/A-190_001_MappingTable.csv"
-mapping_raw <- read.csv(mapping_file)
+#mapping_file <- "./HILIC_library/A-190_001_MappingTable.csv"
+#mapping_raw <- read.csv(mapping_file)
 
 ## Build reference library
 mcq_threshold <- 0.9
