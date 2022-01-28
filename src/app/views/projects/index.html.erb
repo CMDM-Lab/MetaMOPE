@@ -24,16 +24,27 @@
                         </div>
                     </td>
                     <td><%= project.state %></td>
-                    <td>
-                        <ul>
-                            <li>Window_size:<%= project.mcq_win_size %></li>
-                            <li>Flatness_factor:<%= project.flat_fac %></li>
-                            <li>MCQ_threshold:<%= project.mcq_threshold %></li>
-                            <li>Peak_intensity_threshold:<%= project.peak_int_threshold %></li>
-                            <li>std_over_blk:<%= project.std_blk %></li>
-                            <li>rsd_of_rt:<%= project.rsd_rt %></li>
-                        </ul>
-                    </td>
+                    <% if project.mobile_phase_evaluation %>
+                        <td>
+                            <ul>
+                                <li>Window_size:<%= project.mcq_win_size %></li>
+                                <li>MCQ_threshold:<%= project.mcq_threshold %></li>
+                                <li>Peak_intensity_threshold:<%= project.peak_int_threshold %></li>
+                            </ul>
+                        </td>
+                    <% end %>
+                    <% if project.peak_evaluation %>
+                        <td>
+                            <ul>
+                                <li>Window_size:<%= project.mcq_win_size %></li>
+                                <li>Flatness_factor:<%= project.flat_fac %></li>
+                                <li>MCQ_threshold:<%= project.mcq_threshold %></li>
+                                <li>Peak_intensity_threshold:<%= project.peak_int_threshold %></li>
+                                <li>std_over_blk:<%= project.std_blk %></li>
+                                <li>rsd_of_rt:<%= project.rsd_rt %></li>
+                            </ul>
+                        </td>
+                    <% end %>
                     <td><%= project.created_at %></td>
                     <td></td>
                 <tr>
