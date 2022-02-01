@@ -7,7 +7,7 @@
 
         <% if @project.mobile_phase_evaluation %>
             <h3>Mobile phase evaluation</h3>
-            <hr style="width:1210px">
+            <br>
 
             <%= f.fields_for :uploads do |u| %>
                 <div>
@@ -19,15 +19,18 @@
     
                 <div>
                     <%= u.label :upload_mzxml_files %>
-                    <%= u.file_field :mzxmls, multiple: true, name: "attachment[file][]" %>
+                    <%= u.file_field :mzxmls, multiple: true %>
                     <br>
                     <br>
                 </div>
+                <br>
 
+                <%= u.link_to_remove "Cancel this upload" %>
+               
                 <hr style="width:1210px">
         
             <% end %>
-    
+            
             <%= f.link_to_add "New upload", :uploads %>
 
             <div>
@@ -38,6 +41,7 @@
 
         <% if @project.peak_evaluation %>
             <h3>Peak evaluation</h3>
+            <br>
 
             <%= f.fields_for :uploads do |u| %>
                 <div>
@@ -49,9 +53,12 @@
     
                 <div>
                     <%= u.label :upload_mzxml_files %>
-                    <%= u.file_field :mzxmls, multiple: true, name: "attachment[file][]" %>
+                    <%= u.file_field :mzxmls, multiple: true %>
                     <br>
                 </div>
+                <br>
+
+                <%= u.link_to_remove "Cancel this upload" %>
 
                 <hr style="width:1210px">
         
@@ -95,7 +102,7 @@
                 </td>
                 <% @project.uploads.each do |upload| %>
                     <td><%= upload.mobile_phase %></td>
-                    <td><%= upload.mzxmls.filename %></td>
+                    <td><%= upload.mzxmls %></td>
                     <td><%= upload.file_size %></td>
                     <td><%= upload.created_at %></td>
                 <% end %>

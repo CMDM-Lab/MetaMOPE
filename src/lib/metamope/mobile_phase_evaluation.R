@@ -24,7 +24,7 @@ setwd(working_dir)
 ## read information of standards
 library(tidyverse)
 #standards_file <- "./40StdQC.csv"
-standards_raw <- read.csv(standards_file)
+standards_raw <- read.csv(standard_file)
 standards_pos <- standards_raw[standards_raw$Ion.Mode == "pos", ] %>% select(-neg_mz) %>% rename(mz=pos_mz)
 standards_neg <- standards_raw[standards_raw$Ion.Mode == "neg", ] %>% select(-pos_mz) %>% rename(mz=neg_mz)
 

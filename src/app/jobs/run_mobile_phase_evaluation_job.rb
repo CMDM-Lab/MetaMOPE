@@ -12,7 +12,7 @@ class RunMobilePhaseEvaluationJob < ApplicationJob
     uploads = @project.uploads
     mobile_phases = []
     uploads.each do |u|
-      mobile_phses.push(u.mobile_phase)
+      mobile_phases.push(u.mobile_phase)
     end
     mzxml_files = []
     uploads.each do |u|

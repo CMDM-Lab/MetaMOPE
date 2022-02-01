@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_05_022109) do
+ActiveRecord::Schema.define(version: 2022_01_31_041237) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -50,18 +50,12 @@ ActiveRecord::Schema.define(version: 2022_01_05_022109) do
     t.boolean "mobile_phase_evaluation"
     t.boolean "peak_evaluation"
     t.string "access_key"
-    t.string "upload"
-    t.integer "mcq_win_size"
-    t.integer "sample_repeat"
-    t.integer "flat_fac"
-    t.integer "mcq_threshold"
-    t.integer "peak_int_threshold"
-    t.integer "std_blk"
-    t.integer "rsd_rt"
-    t.integer "jagedness"
-    t.integer "assy_fac"
-    t.integer "fwhm"
-    t.integer "modality"
+    t.float "mcq_win_size"
+    t.float "flat_fac"
+    t.float "mcq_threshold"
+    t.float "peak_int_threshold"
+    t.float "std_blk"
+    t.float "rsd_rt"
     t.text "output"
   end
 
