@@ -7,6 +7,10 @@ class Project < ApplicationRecord
 	has_one_attached :injection
 	has_one_attached :standard
 
+	validates :grouping, blob:{content_type: ['text/csv']}
+	validates :injection, blob:{content_type: ['text/csv']}
+	validates :standard, blob:{content_type: ['text/csv']}
+
 	accepts_nested_attributes_for :uploads,
 		:allow_destroy => true,
 		:reject_if => :all_blank

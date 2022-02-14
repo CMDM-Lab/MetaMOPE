@@ -19,10 +19,10 @@
                     <td>Mobile phase evaluation & Peak evaluation</td>
                 <% end %>
                 <% if @project.mobile_phase_evaluation & !@project.peak_evaluation %>
-                    <td>Mobile phase evalution</td>
+                    <td>Mobile phase evaluation</td>
                 <% end %>    
                 <% if @project.peak_evaluation & !@project.mobile_phase_evaluation %>
-                    <td>Peak evalution</td>    
+                    <td>Peak evaluation</td>    
                 <% end %>    
             </tr>
             <tr><td>Window size</td><td><%= @project.mcq_win_size %></td></tr>
@@ -36,14 +36,15 @@
     <h3>Uploaded file</h3>
     <div class="well">
         <ol>
-            <% @uploads.each do |u|%>
-                <% if @project.mobile_phase_evaluation %>
-                    <li><%= u.grouping.filename %></li>
-                <% else %>
-                    <li><%= u.injection.filename %></li>
-                <% end %>
-                <li><%= u.standard.filename %></li>
-                <li><%= u.mzxml.filename %></li>
+            <% if @project.mobile_phase_evaluation %>
+                <li><%= @project.grouping.filename %></li>
+            <% end %>
+            <% if @project.peak_evaluation %>
+                <li><%= @project.injection.filename %></li>
+            <% end %>
+            <li><%= @project.standard.filename %></li>
+            <% @uploads.each do |u| %>
+                <li><%= u.mzxmls %></li>
             <% end %>
         </ol>
     </div>

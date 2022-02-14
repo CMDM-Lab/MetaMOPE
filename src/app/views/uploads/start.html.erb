@@ -88,25 +88,25 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <ol>
-                        <% if @project.mobile_phase_evaluation %>
-                            <li><%= @project.grouping.filename %></li>
-                        <% end %>
-                        <% if @project.peak_evaluation %>
-                            <li><%= @project.injection.filename %><li>
-                        <% end %>
-                        <li><%= @project.standard.filename %><li>
-                    </ol>
-                </td>
-                <% @project.uploads.each do |upload| %>
+            <% @project.uploads.each do |upload| %>
+                <tr>
+                    <td>
+                        <ol>
+                            <% if @project.mobile_phase_evaluation %>
+                                <li><%= @project.grouping.filename %></li>
+                            <% end %>
+                            <% if @project.peak_evaluation %>
+                                <li><%= @project.injection.filename %><li>
+                            <% end %>
+                            <li><%= @project.standard.filename %><li>
+                        </ol>
+                    </td>
                     <td><%= upload.mobile_phase %></td>
                     <td><%= upload.mzxmls %></td>
                     <td><%= upload.file_size %></td>
-                    <td><%= upload.created_at %></td>
-                <% end %>
-            </tr>    
+                    <td><%= upload.created_at %></td>                
+                </tr>
+            <% end %>        
         </tbody>
     </table>
 
