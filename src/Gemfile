@@ -29,7 +29,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'dotenv-rails'
 gem 'cancancan'
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 2.2', '>= 2.2.2'
 gem 'devise'
 gem 'enumerize'
 gem 'haml'

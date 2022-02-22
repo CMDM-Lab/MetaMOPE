@@ -1,6 +1,7 @@
 class Upload < ApplicationRecord
     belongs_to :project
-    has_many_attached :mzxmls
+    #has_many_attached :mzxmls
+    mount_uploaders :mzxmls, MzxmlsUploader
 
-    validates :mzxmls, blob: {content_type: ['application/xml']}
+    #validates :mzxmls, blob: {content_type: ['application/xml']}
 end

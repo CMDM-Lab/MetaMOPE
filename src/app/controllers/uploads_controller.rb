@@ -33,6 +33,6 @@ class UploadsController < ApplicationController
 
     private
     def upload_params
-        params.require(:upload).permit(:project_id, :mobile_phase, mzxmls:[])
+        params.require(:upload).permit(:project_id, :mobile_phase, :mzxmls => [])
     end
 end
