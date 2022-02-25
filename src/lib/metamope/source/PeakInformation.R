@@ -1,7 +1,7 @@
 ## library
 library(xcms)
 library(baseline)
-library(prospectr)
+#library(prospectr)
 
 ## source files
 source("./source/EIC.R")
@@ -40,7 +40,7 @@ getPeakInformation <- function(standards, mzXML_file, peak_information_file, mcq
     
     ## IRLS baseline correction (bc)
     # library(baseline)
-    bc <- baseline(spectrum_k, method='irls')
+    bc <- baseline::baseline(spectrum_k, method='irls')
     bc_spectrum <- getCorrected(bc)
     
     ## Savitzky-Golay (sg) smoothing filter

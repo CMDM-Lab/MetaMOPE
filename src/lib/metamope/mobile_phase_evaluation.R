@@ -1,6 +1,5 @@
 #working_dir <- "~/Desktop/project/xcms/mobile_phase_evaluation/"
 #setwd(working_dir)
-#options(stringsAsFactors=FALSE)
 input.arg = commandArgs(TRUE)
 working_dir = input.arg[1]
 grouping_file = input.arg[2]
@@ -13,6 +12,7 @@ intensity_threshold = as.numeric(input.arg[8])
 #need adjustment to deal with the one with no assigned parameters and use the default value as line 36~38
 
 setwd(working_dir)
+options(stringsAsFactors=FALSE)
 
 ## library
 # library(tidyverse)
@@ -25,8 +25,8 @@ setwd(working_dir)
 library(tidyverse)
 #standards_file <- "./40StdQC.csv"
 standards_raw <- read.csv(standard_file)
-standards_pos <- standards_raw[standards_raw$Ion.Mode == "pos", ] %>% select(-neg_mz) %>% rename(mz=pos_mz)
-standards_neg <- standards_raw[standards_raw$Ion.Mode == "neg", ] %>% select(-pos_mz) %>% rename(mz=neg_mz)
+standards_pos <- standards_raw[standards_raw$Ion.Mode == "pos", ] #%>% select(-neg_mz) %>% rename(mz=pos_mz)
+standards_neg <- standards_raw[standards_raw$Ion.Mode == "neg", ] #%>% select(-pos_mz) %>% rename(mz=neg_mz)
 
 ## peak information of a mobile phase
 #mzXML_dir <- "./mzXML/"
@@ -42,20 +42,22 @@ intensity_threshold <- 5000
 
 source("./source/PeakInformation.R")
 #for (mobile_phase in mobile_phases) {
-for (i in 1:mobile_phase_n){
+for (mobile_phase in mobile_phases){
   for (mode in c("pos", "neg")) {
     standards <- switch(mode, pos=standards_pos, neg=standards_neg)
     #mzXML_file <- list.files(paste0(mzXML_dir, mobile_phases[i]), pattern=paste0("*_", mode, "\\.mzXML"))
-    mzXML_file <- list.mzxml_files(pattern=paste0("*_", mode, "\\.mzXML"))
-    peak_information_file <- sub("\\.mzXML", "_peak_information.csv", mzXML_file)
-    getPeakInformation(standards=standards,
-                       #mzXML_file=paste0(mzXML_dir, mobile_phases[i], "/", mzXML_file),
-                       mzXML_file=mzXML_file
-                       peak_information_file=paste0(peak_information_dir, mobile_phases[i], "/", peak_information_file), 
-                       mcq_threshold=mcq_threshold, 
-                       intensity_threshold=intensity_threshold, 
-                       EIC_ppm_tolerance=EIC_ppm_tolerance[mobile_phases[i], mode], 
-                       MCQ_win_size=MCQ_win_size)
+    files <- mzXML_files(pattern=paste0("_", mode, "_"))
+    for (mzXML_file in files){
+      peak_information_file <- sub("\\.mzXML", paste0("_",mode,"_peak_information.csv"), mzXML_file)
+      getPeakInformation(standards=standards,
+                        #mzXML_file=paste0(mzXML_dir, mobile_phases[i], "/", mzXML_file),
+                        mzXML_file=mzXML_file
+                        peak_information_file=paste0(peak_information_dir, mobile_phase, "/", peak_information_file), 
+                        mcq_threshold=mcq_threshold, 
+                        intensity_threshold=intensity_threshold, 
+                        EIC_ppm_tolerance=EIC_ppm_tolerance[mobile_phase, mode], 
+                        MCQ_win_size=MCQ_win_size)
+    }
   }
 }
 
@@ -66,10 +68,10 @@ standards_neg_n <- nrow(standards_neg)
 all_AsFs <- matrix(0, standards_n, mobile_phase_n)
 colnames(all_AsFs) <- mobile_phases
 for (i in 1:mobile_phase_n) {
-  pos_file <- list.files(paste0(peak_information_dir, mobile_phases[i]), pattern="*_pos_peak_information.csv")
-  pos_peak_information <- read.csv(paste0(peak_information_dir, mobile_phases[i], "/", pos_file))
-  neg_file <- list.files(paste0(peak_information_dir, mobile_phases[i]), pattern="*_neg_peak_information.csv")
-  neg_peak_information <- read.csv(paste0(peak_information_dir, mobile_phases[i], "/", neg_file))
+  pos_file <- list.files(peak_information_dir, pattern="*_pos_peak_information.csv")
+  pos_peak_information <- read.csv(paste0(peak_information_dir, "/", pos_file[i]))
+  neg_file <- list.files(peak_information_dir, pattern="*_neg_peak_information.csv")
+  neg_peak_information <- read.csv(paste0(peak_information_dir, "/", neg_file))
   all_AsFs[1:standards_pos_n, i] <- pos_peak_information$asymmetry_factor
   all_AsFs[(standards_pos_n+1):standards_n, i] <- neg_peak_information$asymmetry_factor
 }
