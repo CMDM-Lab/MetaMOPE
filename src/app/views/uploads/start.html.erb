@@ -3,76 +3,68 @@
     <h2 style='font-size:36px'>Upload project file</h2>
     <hr style="width:1210px">
 
-    <%= nested_form_for(@project) do |f| %>
-
         <% if @project.mobile_phase_evaluation %>
             <h3>Mobile phase evaluation</h3>
             <br>
 
-            <%= f.fields_for :uploads do |u| %>
-                <div>
-                    <%= u.label :mobile_phase %>
-                    <%= u.text_field :mobile_phase %>
-                    <br>
-                    <br>
-                </div>
-    
-                <div>
-                    <%= u.label :upload_mzxml_files %>
-                    <%= u.file_field :mzxmls, multiple: true %>
-                    <br>
-                    <br>
-                </div>
-                <br>
+            <%= nested_form_for(@project) do |f| %>
 
-                <%= u.link_to_remove "Cancel this upload" %>
-               
-                <hr style="width:1210px">
+                <%= f.fields_for :uploads do |u| %>
+                    <div>
+                        <%= u.label :mobile_phase %>
+                        <%= u.text_field :mobile_phase %>
+                        <br>
+                        <br>
+                    </div>
         
-            <% end %>
+                    <div>
+                        <%= u.label :upload_mzxml_files %>
+                        <%= u.file_field :mzxmls, multiple: true %>
+                        <br>
+                        <br>
+                    </div>
+                    <br>
+
+                    <%= u.link_to_remove "Cancel this upload" %>
+                
+                    <hr style="width:1210px">
             
-            <%= f.link_to_add "New upload", :uploads %>
+                <% end %>
+                
+                <%= f.link_to_add "New upload", :uploads %>
 
-            <div>
-                <%= f.submit "Upload" %>
-            </div>
+                <div>
+                    <%= f.submit "Upload" %>
+                </div>
 
-        <% end %>
+            <% end %>
+
+        <% end %>  
 
         <% if @project.peak_evaluation %>
+
             <h3>Peak evaluation</h3>
             <br>
 
-            <%= f.fields_for :uploads do |u| %>
-                <div>
-                    <%= u.label :mobile_phase %>
-                    <%= u.text_field :mobile_phase %>
-                    <br>
-                    <br>
-                </div>
-    
-                <div>
-                    <%= u.label :upload_mzxml_files %>
-                    <%= u.file_field :mzxmls, multiple: true %>
-                    <br>
-                </div>
-                <br>
+            <%= form_for :upload, url: {action: "create"} do |f| %> 
 
-                <%= u.link_to_remove "Cancel this upload" %>
+                <div>
+                    <%= f.label :upload_mzxml_files %>
+                    <%= f.file_field :mzxmls, multiple: true %>
+                    <br>
+                </div>
+               <br>
 
                 <hr style="width:1210px">
-        
-            <% end %>
-    
-            <%= f.link_to_add "New upload", :uploads %>
+                
+                <div>
+                    <%= f.submit "Upload" %>
+                </div>
 
-            <div>
-                <%= f.submit "Upload" %>
-            </div>
+            <% end %>
 
         <% end %>
     
-    <% end %>
 
     <hr style="width:1210px">
 
