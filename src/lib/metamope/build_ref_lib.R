@@ -1,6 +1,22 @@
 #setwd("~/Desktop/project/xcms/building_reference_library/")
 #options(stringsAsFactors=FALSE)
 
+input.arg = commandArgs(TRUE)
+working_dir = input.arg[1]
+inj_order_file = input.arg[2]
+standard_file = input.arg[3]
+mzXML_files = input.arg[4]
+win_size = input.arg[5]
+mcq_threshold = input.arg[6]
+intensity_threshold = input.arg[7]
+flatness_factor = input.arg[8]
+std_blk_threshold = input.arg[9]
+rt_rsd_threshold = input.arg[10]
+#outfile
+
+setwd(working_dir)
+options(stringsAsFactors=FALSE)
+
 ## library
 library(xcms)
 library(baseline)
@@ -16,24 +32,26 @@ source("../source/FWHM.R")
 source("../source/Modality.R")
 
 ## Repo
-A190_repo <- "/Volumes/cmdm/dong-ming-tsai/CAPD/dong-ming-dialysis-hilic/A-190"
-batch_repo <- "/001/20140114_A-190_pos_batch01"
-in_repo <- paste0(A190_repo, batch_repo)
-out_repo <- paste0("./new_data", batch_repo)
+#A190_repo <- "/Volumes/cmdm/dong-ming-tsai/CAPD/dong-ming-dialysis-hilic/A-190"
+#batch_repo <- "/001/20140114_A-190_pos_batch01"
+#in_repo <- paste0(A190_repo, batch_repo)
+#out_repo <- paste0("./new_data", batch_repo)
+in_repo <- mzxml_files
+out_repo <- working_dir
 # dir.create(out_repo)
 # dir.create(paste0(out_repo, "/EIC"))
 
 ##  Injection order
-inj_order_file <- paste0(in_repo, "/20140114_A-190_pos_batch01.csv")
+#inj_order_file <- paste0(in_repo, "/20140114_A-190_pos_batch01.csv")
 # inj_order_file <- "/Volumes/cmdm/dong-ming-tsai/CAPD/dong-ming-dialysis-hilic/A-190/002/20140123_A-190_neg_batch04/20140123_A-190_neg_batch04.csv"
 inj_order_raw <- read.csv(inj_order_file)
 inj_order <- inj_order_raw
-inj_order$FileName <- sapply(inj_order$FileName, function(x) sub("\\.d", "\\.mzXML", x))
+#inj_order$FileName <- sapply(inj_order$FileName, function(x) sub("\\.d", "\\.mzXML", x))
 inj_order$Blk <- sapply(inj_order$FileName, function(x) grepl("BK", x))
-inj_order_test <- inj_order[65:96, ]
+inj_order_test <- inj_order
 
 ## Standards
-standards_file <- "./HILIC_library/algo_CODA90_pos_A190.csv"
+#standards_file <- "./HILIC_library/algo_CODA90_pos_A190.csv"
 # standards_file <- "./HILIC_library/stdlib_HILIC_v5.csv"
 standards_raw <- read.csv(standards_file)
 ## ./HILIC_library/algo_CODA90_pos_A190.csv invalid name
@@ -42,8 +60,8 @@ standards_raw <- read.csv(standards_file)
 #standards_raw$analyte[239] <- "pos_seq470_C0620_PS_mz736.512"
 ## ./HILIC_library/algo_CODA90_neg_A190.csv invalid name
 # standards_raw$analyte[177] <- "neg_seq470_C0620_PS_mz734.498"
-standards_raw$Name <- sapply(standards_raw$analyte, function(x) unlist(strsplit(x, "_"))[4])
-standards_raw$mz <- sapply(standards_raw$analyte, function(x) as.numeric(unlist(strsplit(x, "mz"))[2]))
+#standards_raw$Name <- sapply(standards_raw$analyte, function(x) unlist(strsplit(x, "_"))[4])
+#standards_raw$mz <- sapply(standards_raw$analyte, function(x) as.numeric(unlist(strsplit(x, "mz"))[2]))
 # standards_raw$Name <- standards$Compound.Name
 
 ## Mapping
@@ -61,25 +79,26 @@ t0 <- Sys.time()
 while (s <= sample_n) {
   ## Blk
   if (inj_order_test$Blk[s]) {
-    blk_file <- paste0(in_repo, "/mzXML/", inj_order_test$FileName[s])
+    #blk_file <- paste0(in_repo, inj_order_test$FileName[s])
+    blk_file <- mzXML_files[inj_order_test$InjectionOrder]
     blk_raw_data <- readMSData(blk_file, mode="onDisk")
     s <- s + 1
     next
   }
   
   ## 3 repeats
-  mzXML_file <- inj_order_test$FileName[s:(s+2)]
-  mzXML_file <- sapply(mzXML_file, function(x) paste0(in_repo, "/mzXML/", x))
-  rep_n <- length(mzXML_file)
+  #mzXML_file <- inj_order_test$FileName[s:(s+2)]
+  #mzXML_file <- sapply(mzXML_file, function(x) paste0(in_repo, "/mzXML/", x))
+  rep_n <- length(mzXML_files)
   sample_name <- grep("S0..", unlist(strsplit(inj_order_test$FileName[s], "_")), value=TRUE)
   # sample_rows <- grep(sample_name, standards_raw$mix)
-  mix_name <- mapping_raw$Sample_ID[grep(sample_name, mapping_raw$Mapping_ID)]
-  mix_name <- grep("Mix0..", unlist(strsplit(mix_name, " ")), value=TRUE)
-  mix_name <- sub("Mix0", "N", mix_name)
+  #mix_name <- mapping_raw$Sample_ID[grep(sample_name, mapping_raw$Mapping_ID)]
+  #mix_name <- grep("Mix0..", unlist(strsplit(mix_name, " ")), value=TRUE)
+  #mix_name <- sub("Mix0", "N", mix_name)
   # mix_name <- sub("Mix", "S", mix_name)
-  sample_rows <- grep(mix_name, standards_raw$mix)
+  #sample_rows <- grep(mix_name, standards_raw$mix)
   # sample_rows <- grep(mix_name, standards_raw$remix)
-  standards <- standards_raw[sample_rows, ]
+  standards <- standards_raw$Name
   standards_n <- nrow(standards)
   ion_mode <- "pos"
   s <- s + 3
@@ -96,7 +115,7 @@ while (s <= sample_n) {
   jaggedness <- asyFactor <- fwhm <- modality <- matrix(0, nrow = standards_n, ncol = rep_n)
   rt_rsd <- vector(mode="numeric", length=standards_n)
   for (r in 1:rep_n) {
-    raw_data <- readMSData(mzXML_file[r], mode="onDisk")  
+    raw_data <- readMSData(mzXML_files[r], mode="onDisk")  
     for (k in 1:standards_n) {
       ## EIC
       # source("./source/EIC.R")
@@ -106,7 +125,7 @@ while (s <= sample_n) {
       # mz_k <- switch(ion_mode,
       #                pos=standards[k, ]$mzpos,
       #                neg=standards[k, ]$mzneg)
-      mz_k <- standards[k, ]$mz
+      mz_k <- standards_raw$mz[k]
       eics <- getEICs(raw_data=raw_data, mz=mz_k, ppm_tolerance=10)
       eic_1 <- eics[1, 1]
       blk_eics <- getEICs(raw_data=blk_raw_data, mz=mz_k, ppm_tolerance=10)
@@ -123,7 +142,7 @@ while (s <= sample_n) {
       
       ## IRLS baseline correction (bc)
       # library(baseline)
-      bc <- baseline(spectrum_k, method='irls')
+      bc <- baseline::baseline(spectrum_k, method='irls')
       bc_spectrum <- getCorrected(bc)
       # blk_bc <- baseline(blk_spectrum_k, method='irls')
       # blk_bc_spectrum <- getCorrected(blk_bc)
@@ -182,7 +201,7 @@ while (s <= sample_n) {
   ## Write results
   all_results <- data.frame(
     # compund = standards$Compound.Name,
-    compound = standards$Name,
+    compound = standards,
     mcq_1st = mcq[ , 1],
     mcq_2nd = mcq[ , 2],
     mcq_3rd = mcq[ , 3],

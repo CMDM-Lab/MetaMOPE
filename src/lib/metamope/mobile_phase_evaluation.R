@@ -10,6 +10,7 @@ MCQ_win_size = as.numeric(input.arg[6])
 mcq_threshold = as.numeric(input.arg[7])
 intensity_threshold = as.numeric(input.arg[8])
 #need adjustment to deal with the one with no assigned parameters and use the default value as line 36~38
+#outfile
 
 setwd(working_dir)
 options(stringsAsFactors=FALSE)
