@@ -88,13 +88,19 @@
                                 <li><%= @project.grouping.filename %></li>
                             <% end %>
                             <% if @project.peak_evaluation %>
-                                <li><%= @project.injection.filename %><li>
+                                <li><%= @project.injection.filename %></li>
                             <% end %>
-                            <li><%= @project.standard.filename %><li>
+                            <li><%= @project.standard.filename %></li>
                         </ol>
                     </td>
                     <td><%= upload.mobile_phase %></td>
-                    <td><%= upload.mzxmls %></td>
+                    <td>
+                        <% upload.mzxmls_identifiers.each do |i| %>
+                            <ul>
+                                <li><%= i %></li>
+                            </ul>
+                        <% end %>
+                    </td>
                     <td><%= upload.file_size %></td>
                     <td><%= upload.created_at %></td>                
                 </tr>

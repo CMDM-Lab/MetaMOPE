@@ -5,12 +5,11 @@ working_dir = input.arg[1]
 grouping_file = input.arg[2]
 standard_file = input.arg[3]
 mobile_phases = input.arg[4]
-mzxml_files = input.arg[5]
+mzxml_files_phases = input.arg[5]
 MCQ_win_size = as.numeric(input.arg[6])
 mcq_threshold = as.numeric(input.arg[7])
 intensity_threshold = as.numeric(input.arg[8])
 #need adjustment to deal with the one with no assigned parameters and use the default value as line 36~38
-#outfile
 
 setwd(working_dir)
 options(stringsAsFactors=FALSE)
@@ -43,20 +42,20 @@ intensity_threshold <- 5000
 
 source("./source/PeakInformation.R")
 #for (mobile_phase in mobile_phases) {
-for (mobile_phase in mobile_phases){
+for (i, 1:length(mobile_phase_n)){
   for (mode in c("pos", "neg")) {
     standards <- switch(mode, pos=standards_pos, neg=standards_neg)
     #mzXML_file <- list.files(paste0(mzXML_dir, mobile_phases[i]), pattern=paste0("*_", mode, "\\.mzXML"))
-    files <- mzXML_files(pattern=paste0("_", mode, "_"))
+    files <- list(mzXML_files_phases[i], pattern=paste0("_", mode, "_"))
     for (mzXML_file in files){
       peak_information_file <- sub("\\.mzXML", paste0("_",mode,"_peak_information.csv"), mzXML_file)
       getPeakInformation(standards=standards,
                         #mzXML_file=paste0(mzXML_dir, mobile_phases[i], "/", mzXML_file),
                         mzXML_file=mzXML_file
-                        peak_information_file=paste0(peak_information_dir, mobile_phase, "/", peak_information_file), 
+                        peak_information_file=paste0(peak_information_dir, "/", peak_information_file), 
                         mcq_threshold=mcq_threshold, 
                         intensity_threshold=intensity_threshold, 
-                        EIC_ppm_tolerance=EIC_ppm_tolerance[mobile_phase, mode], 
+                        EIC_ppm_tolerance=EIC_ppm_tolerance[mobile_phases[i], mode], 
                         MCQ_win_size=MCQ_win_size)
     }
   }
@@ -72,7 +71,7 @@ for (i in 1:mobile_phase_n) {
   pos_file <- list.files(peak_information_dir, pattern="*_pos_peak_information.csv")
   pos_peak_information <- read.csv(paste0(peak_information_dir, "/", pos_file[i]))
   neg_file <- list.files(peak_information_dir, pattern="*_neg_peak_information.csv")
-  neg_peak_information <- read.csv(paste0(peak_information_dir, "/", neg_file))
+  neg_peak_information <- read.csv(paste0(peak_information_dir, "/", neg_file[i]))
   all_AsFs[1:standards_pos_n, i] <- pos_peak_information$asymmetry_factor
   all_AsFs[(standards_pos_n+1):standards_n, i] <- neg_peak_information$asymmetry_factor
 }

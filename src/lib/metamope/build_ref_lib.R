@@ -23,13 +23,13 @@ library(baseline)
 library(prospectr)
 
 ## source files
-source("../source/EIC.R")
-source("../source/CODA.R")
-source("../source/Spectrum.R")
-source("../source/Jaggedness.R")
-source("../source/AsymmetryFactor.R")
-source("../source/FWHM.R")
-source("../source/Modality.R")
+source("./source/EIC.R")
+source("./source/CODA.R")
+source("./source/Spectrum.R")
+source("./source/Jaggedness.R")
+source("./source/AsymmetryFactor.R")
+source("./source/FWHM.R")
+source("./source/Modality.R")
 
 ## Repo
 #A190_repo <- "/Volumes/cmdm/dong-ming-tsai/CAPD/dong-ming-dialysis-hilic/A-190"

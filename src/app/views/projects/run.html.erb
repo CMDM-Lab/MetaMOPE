@@ -44,10 +44,10 @@
             <% end %>
             <li><%= @project.standard.filename %></li>
             <% @uploads.each do |u| %>
-                <li><%= u.mzxmls %></li>
+                <li><%= u.mzxmls_identifiers %></li>
             <% end %>
         </ol>
     </div>
     <hr style='width:1210px'>
-    <%= link_to 'Enqueue and run MetaMOPE', do_run_project_path(@project, @upload), :class => 'btn btn-primary' %>
+    <%= link_to 'Enqueue and run MetaMOPE', do_run_project_path(@project), :class => 'btn btn-primary' %>
 </div>

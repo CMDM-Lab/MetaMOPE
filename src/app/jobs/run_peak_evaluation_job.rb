@@ -10,7 +10,7 @@ class RunPeakEvaluationJob < ApplicationJob
     metomope_peak_evaluation = Rails.root.join('lib', 'metamope','build_ref_lib.R')
     injection_order_file = @project.injection
     standard_file = @project.standard
-    mzxml_file = @upload.mzxmls
+    mzxml_file = @upload.mzxmls_urls
     mcq_win_size = @project.mcq_win_size
     mcq_threshold = @project.mcq_threshold
     intensity_threshold = @project.peak_int_threshold
@@ -19,10 +19,10 @@ class RunPeakEvaluationJob < ApplicationJob
     rt_rsd_threshold = @project.rsd_rt
     metamope_projects = Rails.root.join('tmp', 'metomope', 'projects').to_s
     working_dir = metamope_projects + "/#{@project.id}"
-    outfile = metamope_projects + "/#{@project.id}/" + 'result.csv'
-    zipfile = metamope_projects + "/#{@project.id}/" + 'Result.zip'
+    outfile = working_dir + 'result.csv'
+    zipfile = working_dir + 'Result.zip'
     #output = `Rscript --vanilla #{metamope_peak_evaluation} < #{injection_order_file} #{standard_file} #{mzxml_file} > #{outfile} [#{mcq_win_size} #{mcq_threshold} #{intensity_threshold} #{flatness_factor} #{std_blk_threshold} #{rt_rsd_threshold}]`
-    output = `Rscript --vanilla #{metamope_peak_evaluation} -p '[#{working_dir} #{injection_order_file} #{standard_file} #{mzxml_file} #{mcq_win_size} #{mcq_threshold} #{intensity_threshold} #{flatness_factor} #{std_blk_threshold} #{rt_rsd_threshold} #{outfile}]' 2>&1 > #{metamope_projects}/#{@project.id}/log.txt`
+    output = `Rscript --vanilla #{metamope_peak_evaluation} -p '[#{working_dir} #{injection_order_file} #{standard_file} #{mzxml_file} #{mcq_win_size} #{mcq_threshold} #{intensity_threshold} #{flatness_factor} #{std_blk_threshold} #{rt_rsd_threshold}]' 2>&1 > #{metamope_projects}/#{@project.id}/log.txt`
     @project.output = output 
     if File.exists?(outfile)
 	    zip_log = `zip -j #{zipfile} #{outfile}`
