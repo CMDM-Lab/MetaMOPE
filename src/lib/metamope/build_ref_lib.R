@@ -12,7 +12,7 @@ intensity_threshold = input.arg[7]
 flatness_factor = input.arg[8]
 std_blk_threshold = input.arg[9]
 rt_rsd_threshold = input.arg[10]
-#outfile
+#need adjustment to deal with the one with no assigned parameters and use the default value as line 36~38
 
 setwd(working_dir)
 options(stringsAsFactors=FALSE)
@@ -20,16 +20,23 @@ options(stringsAsFactors=FALSE)
 ## library
 library(xcms)
 library(baseline)
-library(prospectr)
+#library(prospectr)
 
 ## source files
-source("./source/EIC.R")
-source("./source/CODA.R")
-source("./source/Spectrum.R")
-source("./source/Jaggedness.R")
-source("./source/AsymmetryFactor.R")
-source("./source/FWHM.R")
-source("./source/Modality.R")
+#source("./source/EIC.R")
+#source("./source/CODA.R")
+#source("./source/Spectrum.R")
+#source("./source/Jaggedness.R")
+#source("./source/AsymmetryFactor.R")
+#source("./source/FWHM.R")
+#source("./source/Modality.R")
+source("../../../../lib/metamope/source/EIC.R")
+source("../../../../lib/metamope/source/CODA.R")
+source("../../../../lib/metamope/source/Spectrum.R")
+source("../../../../lib/metamope/source/Jaggedness.R")
+source("../../../../lib/metamope/source/AsymmetryFactor.R")
+source("../../../../lib/metamope/source/FWHM.R")
+source("../../../../lib/metamope/source/Modality.R")
 
 ## Repo
 #A190_repo <- "/Volumes/cmdm/dong-ming-tsai/CAPD/dong-ming-dialysis-hilic/A-190"
@@ -37,7 +44,7 @@ source("./source/Modality.R")
 #in_repo <- paste0(A190_repo, batch_repo)
 #out_repo <- paste0("./new_data", batch_repo)
 in_repo <- mzxml_files
-out_repo <- working_dir
+out_repo <- paste0(working_dir, "/result") 
 # dir.create(out_repo)
 # dir.create(paste0(out_repo, "/EIC"))
 
@@ -148,7 +155,7 @@ while (s <= sample_n) {
       # blk_bc_spectrum <- getCorrected(blk_bc)
       
       ## Savitzky-Golay (sg) smoothing filter
-      # library(prospectr)
+      library(prospectr)
       sg_spectrum <- savitzkyGolay(bc_spectrum, m=0, p=3, w=11, delta.wav=2)
       # blk_sg_spectrum <- savitzkyGolay(blk_bc_spectrum, m=0, p=3, w=11, delta.wav=2)
       

@@ -4,10 +4,14 @@ library(baseline)
 #library(prospectr)
 
 ## source files
-source("./source/EIC.R")
-source("./source/CODA.R")
-source("./source/Spectrum.R")
-source("./source/AsymmetryFactor.R")
+#source("./source/EIC.R")
+#source("./source/CODA.R")
+#source("./source/Spectrum.R")
+#source("./source/AsymmetryFactor.R")
+source("../../../../lib/metamope/source/EIC.R")
+source("../../../../lib/metamope/source/CODA.R")
+source("../../../../lib/metamope/source/Spectrum.R")
+source("../../../../lib/metamope/source/AsymmetryFactor.R")
 
 getPeakInformation <- function(standards, mzXML_file, peak_information_file, mcq_threshold=0.9, 
                                intensity_threshold=5000, EIC_ppm_tolerance=10, MCQ_win_size=5) {
@@ -44,7 +48,7 @@ getPeakInformation <- function(standards, mzXML_file, peak_information_file, mcq
     bc_spectrum <- getCorrected(bc)
     
     ## Savitzky-Golay (sg) smoothing filter
-    # library(prospectr)
+    library(prospectr)
     sg_spectrum <- savitzkyGolay(bc_spectrum, m=0, p=3, w=11, delta.wav=2)
     
     ## Asymmetry factor

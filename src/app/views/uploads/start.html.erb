@@ -1,13 +1,14 @@
 <%= javascript_pack_tag :application, 'nested_form' %>
 <div class="content">
-    <h2 style='font-size:36px'>Upload project file</h2>
+    <h2 style='font-size:36px'>Upload mzXML files</h2>
     <hr style="width:1210px">
 
         <% if @project.mobile_phase_evaluation %>
+        
             <h3>Mobile phase evaluation</h3>
             <br>
 
-            <%= nested_form_for(@project) do |f| %>
+            <%= nested_form_for(@project, html: { multipart: true }) do |f| %>
 
                 <%= f.fields_for :uploads do |u| %>
                     <div>
@@ -46,7 +47,7 @@
             <h3>Peak evaluation</h3>
             <br>
 
-            <%= form_for :upload, url: {action: "create"} do |f| %> 
+            <%= form_for :upload, url: { action: "create" }, html: { multipart: true } do |f| %> 
 
                 <div>
                     <%= f.label :upload_mzxml_files %>
@@ -72,9 +73,11 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Project file</th>
-                <th>Mobile phase</th>
-                <th>File name</th>
+                <th>Project files</th>
+                <% if @project.mobile_phase_evaluation %>
+                    <th>Mobile phase</th>
+                <% end %>
+                <th>mzXML files</th>
                 <th>File size</th>
                 <th>Upload time</th>
             </tr>
@@ -93,7 +96,9 @@
                             <li><%= @project.standard.filename %></li>
                         </ol>
                     </td>
-                    <td><%= upload.mobile_phase %></td>
+                    <% if @project.mobile_phase_evaluation %>
+                        <td><%= upload.mobile_phase %></td>
+                    <% end %>    
                     <td>
                         <% upload.mzxmls_identifiers.each do |i| %>
                             <ul>

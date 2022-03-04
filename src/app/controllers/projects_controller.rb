@@ -49,14 +49,26 @@ class ProjectsController < ApplicationController
     end
 
     def edit
-        @project = Project.find(params[:id])
+        if params[:id].nil?
+            flash[:alert] = 'Please create a project or select a project from Project list to run analyses  (a blue button under the project name)'
+            redirect_to projects_path
+            return
+        else 
+            @project = Project.find(params[:id])
+        end
     end
 
-    def update 
-        @project = Project.find(params[:id])
-        @project.update(project_params)
-        flash[:notice] = "Project has been updated."
-        redirect_to projects_path  
+    def update
+        if params[:id].nil?
+            flash[:alert] = 'Please create a project or select a project from Project list to run analyses  (a blue button under the project name)'
+            redirect_to projects_path
+            return
+        else 
+            @project = Project.find(params[:id])
+            @project.update(project_params)
+            flash[:notice] = "Project has been updated."
+            redirect_to projects_path
+        end  
     end
 
     def run

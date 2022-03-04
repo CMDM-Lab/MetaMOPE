@@ -36,6 +36,9 @@ getPeakQualityScore <- function(all_AsFs, peak_quality_score_file) {
   cnt <- 1
   for (i in 2:mobile_phase_n) {
     index <- mean_AsFs_order[i]
+    #if (is.na(result$p.value[as.character(i), as.character(i-1)])){
+    #  score_AsFs[index] <- cnt
+    #}
     if (result$p.value[as.character(i), as.character(i-1)] > 0.05) {
       score_AsFs[index] <- cnt
     }

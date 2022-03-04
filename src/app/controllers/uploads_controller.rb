@@ -11,16 +11,23 @@ class UploadsController < ApplicationController
     end
 
     def start
-        @project = Project.find(params[:id])
-        session[:id] = params[:id]
-        session[:access_key] = @project.access_key
+        if params[:id].nil?
+            flash[:alert] = 'Please create a project or select a project from Project list to run analyses  (a blue button under the project name)'
+            redirect_to projects_path
+            return
+        else
+            @project = Project.find(params[:id])
+            session[:id] = params[:id]
+            session[:access_key] = @project.access_key
+        end
     end
 
     def create
         @project = Project.find(session[:id])
         @upload = @project.uploads.create(upload_params)
         session[:project_id] = @project.id
-        #@project.state = "upload"
+        @project.state = "upload"
+        @project.save
         if @upload.save
             redirect_to run_project_path
         end
@@ -33,6 +40,6 @@ class UploadsController < ApplicationController
 
     private
     def upload_params
-        params.require(:upload).permit(:project_id, :mobile_phase, {mzxml: []})
+        params.require(:upload).permit(:project_id, :mobile_phase, {mzxmls: []})
     end
 end

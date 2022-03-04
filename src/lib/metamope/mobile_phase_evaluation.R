@@ -40,7 +40,8 @@ MCQ_win_size <- 3
 mcq_threshold <- 0.9
 intensity_threshold <- 5000
 
-source("./source/PeakInformation.R")
+#source("./source/PeakInformation.R")
+source("../../../../lib/metamope/source/PeakInformation.R")
 #for (mobile_phase in mobile_phases) {
 for (i, 1:length(mobile_phase_n)){
   for (mode in c("pos", "neg")) {
@@ -75,5 +76,7 @@ for (i in 1:mobile_phase_n) {
   all_AsFs[1:standards_pos_n, i] <- pos_peak_information$asymmetry_factor
   all_AsFs[(standards_pos_n+1):standards_n, i] <- neg_peak_information$asymmetry_factor
 }
-source("./source/PeakQualityScore.R")
-getPeakQualityScore(all_AsFs,peak_quality_score_file=paste0(peak_information_dir, "peak_quality_score_table.csv"))
+#source("./source/PeakQualityScore.R")
+source("../../../../lib/metamope/source/PeakQualityScore.R")
+peak_quality_score_dir <- "./peak_quality_score/"
+getPeakQualityScore(all_AsFs,peak_quality_score_file=paste0(peak_quality_score_dir, "peak_quality_score_table.csv"))
