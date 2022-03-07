@@ -17,6 +17,11 @@ RUN apt-get update && apt-get install -y \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update && apt-get install -y nodejs yarn r-base
 
+RUN Rscript -e 'install.packages("BiocManager",dependencies=TRUE, repos="http://cran.rstudio.com/")'
+RUN Rscript -e 'BiocManager::install("xcms")'
+RUN Rscript -e 'install.packages("baseline",dependencies=TRUE, repos="http://cran.rstudio.com/")'
+RUN Rscript -e 'install.packages("prospectr",dependencies=TRUE, repos="http://cran.rstudio.com/")'
+
 # Define build arguments
 ARG USER_ID
 ARG GROUP_ID

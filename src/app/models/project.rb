@@ -3,13 +3,16 @@ class Project < ApplicationRecord
     belongs_to :user
 	has_many :uploads
 
-	has_one_attached :grouping
-	has_one_attached :injection
-	has_one_attached :standard
+	mount_uploader :standard, StandardUploader
+	mount_uploader :injection, InjectionUploader
 
-	validates :grouping, blob:{content_type: ['text/csv']}
-	validates :injection, blob:{content_type: ['text/csv']}
-	validates :standard, blob:{content_type: ['text/csv']}
+	#has_one_attached :grouping
+	#has_one_attached :injection
+	#has_one_attached :standard
+
+	#validates :grouping, blob:{content_type: ['text/csv']}
+	#validates :injection, blob:{content_type: ['text/csv']}
+	#validates :standard, blob:{content_type: ['text/csv']}
 
 	accepts_nested_attributes_for :uploads,
 		:allow_destroy => true,

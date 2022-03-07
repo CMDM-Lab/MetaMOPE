@@ -87,13 +87,10 @@
                 <tr>
                     <td>
                         <ol>
-                            <% if @project.mobile_phase_evaluation %>
-                                <li><%= @project.grouping.filename %></li>
-                            <% end %>
                             <% if @project.peak_evaluation %>
-                                <li><%= @project.injection.filename %></li>
+                                <li><%= @project.injection_identifier %></li>
                             <% end %>
-                            <li><%= @project.standard.filename %></li>
+                            <li><%= @project.standard_identifier %></li>
                         </ol>
                     </td>
                     <% if @project.mobile_phase_evaluation %>

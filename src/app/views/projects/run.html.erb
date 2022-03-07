@@ -26,25 +26,30 @@
                 <% end %>    
             </tr>
             <tr><td>Window size</td><td><%= @project.mcq_win_size %></td></tr>
-            <tr><td>Flatness factor</td><td><%= @project.flat_fac %></td></tr>
+            <% if @project.peak_evaluation %>
+                <tr><td>Flatness factor</td><td><%= @project.flat_fac %></td></tr>
+            <% end %>
             <tr><td>MCQ threshold</td><td><%= @project.mcq_threshold %></td></tr>
             <tr><td>Peak intensity threshold</td><td><%= @project.peak_int_threshold %></td></tr>
-            <tr><td>std/blk</td><td><%= @project.std_blk %></td></tr>
-            <tr><td>RSD of RT</td><td><%= @project.rsd_rt %></td></tr>
+            <% if @project.peak_evaluation %>
+                <tr><td>std/blk</td><td><%= @project.std_blk %></td></tr>
+                <tr><td>RSD of RT</td><td><%= @project.rsd_rt %></td></tr>
+            <% end %>
         </tbody>
     </table>
     <h3>Uploaded file</h3>
     <div class="well">
         <ol>
-            <% if @project.mobile_phase_evaluation %>
-                <li><%= @project.grouping.filename %></li>
-            <% end %>
             <% if @project.peak_evaluation %>
-                <li><%= @project.injection.filename %></li>
+                <li><%= @project.injection_identifier %></li>
             <% end %>
-            <li><%= @project.standard.filename %></li>
+            <li><%= @project.standard_identifier %></li>
             <% @uploads.each do |u| %>
-                <li><%= u.mzxmls_identifiers %></li>
+                <li>
+                    <% u.mzxmls_identifiers.each do |i| %>
+                        <div><%= i %></div>
+                    <% end %>
+                </li>
             <% end %>
         </ol>
     </div>

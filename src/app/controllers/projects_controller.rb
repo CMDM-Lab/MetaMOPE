@@ -137,7 +137,7 @@ class ProjectsController < ApplicationController
     private
     def project_params
         params.require(:project).permit(:access_key, :name, :mobile_phase_evaluation, :peak_evaluation, :state, :upload,
-                                        :grouping, :injection, :standard,
+                                        :injection, :standard,
                                         :mcq_win_size, :flat_fac, :mcq_threshold, :peak_int_threshold, 
                                         :std_blk, :rsd_rt, :output, :uploads_attributes => [:id, :mobile_phase, :_destroy, mzxmls: []])
     end
