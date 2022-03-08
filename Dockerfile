@@ -15,10 +15,22 @@ RUN apt-get update && apt-get install -y \
     curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && apt-get install -y nodejs yarn r-base
+    apt-get update && apt-get install -y nodejs yarn
 
-RUN Rscript -e 'install.packages("BiocManager",dependencies=TRUE, repos="http://cran.rstudio.com/")'
-RUN Rscript -e 'BiocManager::install("xcms")'
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' && \
+    add-apt-repository "deb http://cloud.r-project.org/bin/linux/debian $(lsb_release -cs)-cran40/" && \
+    apt-get update && apt-get install -y \
+    r-base \
+    libnetcdf-dev \
+    libcurl4-openssl-dev \
+    libxml2-dev
+
+RUN Rscript -e 'if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")'
+RUN Rscript -e 'BiocManager::install("xcms", dependencies=TRUE)'
 RUN Rscript -e 'install.packages("baseline",dependencies=TRUE, repos="http://cran.rstudio.com/")'
 RUN Rscript -e 'install.packages("prospectr",dependencies=TRUE, repos="http://cran.rstudio.com/")'
 
