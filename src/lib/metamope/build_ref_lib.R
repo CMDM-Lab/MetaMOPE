@@ -5,7 +5,7 @@ input.arg = commandArgs(TRUE)
 working_dir = input.arg[1]
 inj_order_file = input.arg[2]
 standard_file = input.arg[3]
-mzXML_files = input.arg[4]
+mzXML_files_url = input.arg[4]
 win_size = input.arg[5]
 mcq_threshold = input.arg[6]
 intensity_threshold = input.arg[7]
@@ -43,7 +43,11 @@ source("../../../../lib/metamope/source/Modality.R")
 #batch_repo <- "/001/20140114_A-190_pos_batch01"
 #in_repo <- paste0(A190_repo, batch_repo)
 #out_repo <- paste0("./new_data", batch_repo)
-in_repo <- mzxml_files
+mzXML_files <- c()
+for (file in list.files(mzXML_files_url)){
+  mzXML_files <- append(mzXML_files, paste0(mzXML_files_url, file))
+}
+#in_repo <- mzXML_files
 out_repo <- paste0(working_dir, "/result") 
 # dir.create(out_repo)
 # dir.create(paste0(out_repo, "/EIC"))
@@ -60,7 +64,7 @@ inj_order_test <- inj_order
 ## Standards
 #standards_file <- "./HILIC_library/algo_CODA90_pos_A190.csv"
 # standards_file <- "./HILIC_library/stdlib_HILIC_v5.csv"
-standards_raw <- read.csv(standards_file)
+standards_raw <- read.csv(standard_file)
 ## ./HILIC_library/algo_CODA90_pos_A190.csv invalid name
 #standards_raw$analyte[58] <- "pos_seq119_C0598_TG_mz555.462"
 #standards_raw$analyte[229] <- "pos_seq451_C0619_PC_mz734.569"
@@ -105,8 +109,8 @@ while (s <= sample_n) {
   # mix_name <- sub("Mix", "S", mix_name)
   #sample_rows <- grep(mix_name, standards_raw$mix)
   # sample_rows <- grep(mix_name, standards_raw$remix)
-  standards <- standards_raw$Name
-  standards_n <- nrow(standards)
+  standards <- standards_raw$Compound
+  standards_n <- length(standards)
   ion_mode <- "pos"
   s <- s + 3
   
@@ -236,7 +240,8 @@ while (s <= sample_n) {
     modality_3rd = modality[, 3],
     validation = validation
   )
-  all_results_out_file <- paste0(out_repo, "/", sample_name, "_ref_lib_all_results.csv")
+  #all_results_out_file <- paste0(out_repo, "/", sample_name, "_ref_lib_all_results.csv")
+  all_results_out_file <- paste0(out_repo, "/ref_lib_all_results.csv")
   write.csv(all_results, all_results_out_file)
   
   ## Reference library table

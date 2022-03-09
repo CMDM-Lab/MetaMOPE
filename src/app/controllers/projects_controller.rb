@@ -128,9 +128,9 @@ class ProjectsController < ApplicationController
             return
         else
             access = params[:access_key]
-            @project = Project.where(:access_key => params[:access_key])
+            @project = Project.find_by(:access_key => params[:access_key])
             project_id = @project.id
-            send_file("tmp/metamope/projects/#{project_id}/Result.zip", filename: access, type: "applcation/zip")
+            send_file("#{Rails.root}/tmp/metamope/projects/#{project_id}/result/Result.zip", filename: access+"_Result.zip", type: "applcation/zip")
         end
     end
 

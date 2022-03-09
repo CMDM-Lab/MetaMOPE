@@ -15,12 +15,14 @@
             <% @projects.each do |project| %>
                 <tr>
                     <td><%= project.name %>
-                        <br>
-                        Access_key: <%= project.access_key %>
-                        <br>
+                        <div>
+                            Access_key: <%= project.access_key %>
+                        </div>
                         <div class='btn-group'>
-                            <%= link_to 'Setting', project_update_path(project.id), :title => 'Select this project' %>
-                            <%= link_to 'Upload', start_upload_path(project.id), :title => 'Select this project' %>
+                            <%= link_to 'Setting', project_update_path(project.id), :title => 'Set parameters' %>
+                            <%= link_to 'Upload', start_upload_path(project.id), :title => 'Upload mzXML files' %>
+                            <%= link_to 'Run', run_project_path(project.id), :title => 'Run analyses' %>
+                            <%= link_to 'Retrieve', retrieve_project_path(project.id), :title => 'Retrieve result' %>
                         </div>
                     </td>
                     <td><%= project.state %></td>

@@ -2,7 +2,7 @@
     <h2 style='font-size:36px'>Retrieve result</h2>
     <div class="well">
         <% if @project.state == 'finished' %>
-            <%= link_to (fa_icon 'cloud-download 4x', :text => 'Download result'), retrieve_dl_project_path(params[:access_key]) %>
+            <%= link_to "Download results", retrieve_dl_project_path(params[:access_key]) %>
         <% else %>
             <p>The analysis of this project is not finished. Please come back later.</p>
         <% end %>
