@@ -2,6 +2,19 @@
     <h2 style="font-size:36px">Set parameters</h2>
     <hr style="width:1210px">
 
+    <h3>File format</h3>
+    <% if @project.mobile_phase_evaluation %>
+        <p class="demo">mobile phase evalution</p>
+    <% elsif @project.peak_evaluation%>
+        <p class="demo">peak evaluation</p>
+    <% end %>
+
+    <div>
+        <%= link_to "Download demo file", send_demo_path(params[:id]) %>
+    </div>
+
+    <hr style="width:1210px">
+
     <%= form_for(@project, :url => { :controller => 'projects', :action => 'update', :id => @project}, :html => { :class => "form-horizontal project" }) do |f| %>
         <% if @project.errors.any? %>
             <div id="error_expl" class="panel panel-danger">

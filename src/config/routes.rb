@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get '/projects/do_run(/:id)' => 'projects#do_run', :as => 'do_run_project'
   get '/projects/retrieve(/:access_key)' => 'projects#retrieve', :as => 'retrieve_project'
   get '/projects/retrieve_dl(/:access_key)' => 'projects#retrieve_dl', :as => 'retrieve_dl_project'
+  get '/projects/demo(/:id)' => 'projects#send_demo', :as => 'send_demo'
   resources :projects
   
 end

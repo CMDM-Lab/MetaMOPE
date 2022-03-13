@@ -129,6 +129,15 @@ class ProjectsController < ApplicationController
         end
     end
 
+    def send_demo
+        @project = Project.find(params[:id])
+        if @project.mobile_phase_evaluation
+            send_file("#{Rails.root}/app/assets/images/demo_mp.zip")
+        elsif @project.peak_evaluation
+            send_file("#{Rails.root}/app/assets/images/demo_ref_lib.zip")
+        end
+    end
+
     private
     def project_params
         params.require(:project).permit(:access_key, :name, :mobile_phase_evaluation, :peak_evaluation, :state, :upload,
