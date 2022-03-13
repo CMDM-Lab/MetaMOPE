@@ -38,7 +38,7 @@ class ProjectsController < ApplicationController
         else
             @project = Project.find(params[:id])
             if @project.user_id == current_user.id
-                #@project.status = Project::UPLOAD
+                @project.status = "upload"
                 session[:access_key] = @project.access_key
                 @project.save 
             else    
@@ -93,14 +93,9 @@ class ProjectsController < ApplicationController
         #@project.status = Project::RUN_PENDING
         @project.state = "run_pending"
 		@project.save
-        if @project.mobile_phase_evaluation & @project.peak_evaluation
-            RunMobilePhaseEvaluationJob.perform_now(@project.id)
-            RunPeakEvaluationJob.perform_now(@project.id)
-        end
         if @project.mobile_phase_evaluation & !@project.peak_evaluation
             RunMobilePhaseEvaluationJob.perform_now(@project.id)
-        end
-        if @project.peak_evaluation & !@project.mobile_phase_evaluation
+        elsif @project.peak_evaluation & !@project.mobile_phase_evaluation
             RunPeakEvaluationJob.perform_now(@project.id)
         end
 
