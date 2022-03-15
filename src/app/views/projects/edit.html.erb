@@ -2,11 +2,33 @@
     <h2 style="font-size:36px">Set parameters</h2>
     <hr style="width:1210px">
 
-    <h3>File format</h3>
     <% if @project.mobile_phase_evaluation %>
-        <p class="demo">mobile phase evalution</p>
+        <h3>File format - mobile phase evalution</h3>
+        <ol class="files">
+            <li>Standard file
+                <ul class="files-rules">
+                    <li>Do not change the name of any columns</li>
+                    <li>There are only pos/neg options in ion_mode column (always in lowercase letter)</li>
+                </ul>
+            </li>
+        </ol>
     <% elsif @project.peak_evaluation%>
-        <p class="demo">peak evaluation</p>
+        <h3>File format - peak evaluation</h3>
+        <ol class="files">
+            <li>Injection order file
+                <ul class="files-rules">
+                    <li>Do not change the name of any columns</li>
+                    <li>Make sure the InjectionOrder column of every input are in the right order</li>
+                    <li>Make sure the FileName column of every input are the same as the input mzXML files</li>
+                    <li>There are only TRUE/FALSE options in Blk column (always in capital letter)</li>
+                </ul>
+            </li>
+            <li>Standard file
+                <ul>
+                    <li>Do not change the name of any columns</li>
+                </ul>
+            </li>
+        </ol>
     <% end %>
 
     <div>
@@ -74,13 +96,6 @@
                     <div class="controls field">
                         <%= f.text_field :mcq_win_size, :class => 'form-control' %>
                     </div>
-                </div>
-
-                <div class="control-group omit">        
-                    <%= f.label :Flatness_factor, :class => 'control-label' %>
-                        <div class="controls field">
-                            <%= f.text_field :flat_fac, :class => 'form-control' %>
-                        </div>
                 </div>
 
                 <div class="control-group">        

@@ -29,7 +29,7 @@ class RunMobilePhaseEvaluationJob < ApplicationJob
       FileUtils.mkdir_p(working_dir)
     end
     #output = `Rscript --vanilla #{metamope_mobile_phase_evaluation} #{working_dir} #{standard_file_url} #{mobile_phases_str} #{mzxml_files_phases_str} #{mcq_win_size} #{mcq_threshold} #{intensity_threshold} 2>&1 > #{metamope_projects}/#{@project.id}/log.txt`
-    output = `Rscript --vanilla #{metamope_mobile_phase_evaluation} #{working_dir} #{standard_file_url} #{mobile_phases_str} #{mzxml_files_phases_str} #{mcq_win_size} #{mcq_threshold} #{intensity_threshold}`
+    output = `Rscript --vanilla #{metamope_mobile_phase_evaluation} #{working_dir} #{standard_file_url} #{mobile_phases_str} #{mzxml_files_phases_str} #{mcq_win_size} #{mcq_threshold} #{intensity_threshold} 2>&1 > #{metamope_projects}/#{@project.id}/log.txt`
     #peak_information_file = working_dir + '/peak_information/' + 'PeakInformation.csv'
     peak_information_dir = working_dir + '/peak_information/'
     unless File.exists?(peak_information_dir)

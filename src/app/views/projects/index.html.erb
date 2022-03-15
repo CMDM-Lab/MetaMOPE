@@ -22,7 +22,7 @@
                             <%= link_to 'Setting', project_update_path(project.id), :title => 'Set parameters' %>
                             <%= link_to 'Upload', start_upload_path(project.id), :title => 'Upload mzXML files' %>
                             <%= link_to 'Run', run_project_path(project.id), :title => 'Run analyses' %>
-                            <%= link_to 'Retrieve', retrieve_project_path(project.id), :title => 'Retrieve result' %>
+                            <%= link_to 'Retrieve', retrieve_project_path(project.access_key), :title => 'Retrieve result' %>
                         </div>
                     </td>
                     <td><%= project.state %></td>
@@ -39,7 +39,6 @@
                         <td>
                             <ul>
                                 <li>Window_size: <%= project.mcq_win_size %></li>
-                                <li>Flatness_factor: <%= project.flat_fac %></li>
                                 <li>MCQ_threshold: <%= project.mcq_threshold %></li>
                                 <li>Peak_intensity_threshold: <%= project.peak_int_threshold %></li>
                                 <li>std_over_blk: <%= project.std_blk %></li>

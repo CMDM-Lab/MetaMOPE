@@ -26,9 +26,6 @@
                 <% end %>    
             </tr>
             <tr><td>Window size</td><td><%= @project.mcq_win_size %></td></tr>
-            <% if @project.peak_evaluation %>
-                <tr><td>Flatness factor</td><td><%= @project.flat_fac %></td></tr>
-            <% end %>
             <tr><td>MCQ threshold</td><td><%= @project.mcq_threshold %></td></tr>
             <tr><td>Peak intensity threshold</td><td><%= @project.peak_int_threshold %></td></tr>
             <% if @project.peak_evaluation %>

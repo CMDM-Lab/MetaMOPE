@@ -4,27 +4,54 @@
 		</div>
 		<div id="page">
 			<div id="header" style="margin-left:auto; margin-right:auto; font-size: 12px !important; width:900px; position:relative; margin-top: 50px">
-				<div id="banner" align="center">
-					<table>
-						<td>
-							<!--<img id="GC2MS" align="left" src="http://cmdm.tw/~nauynas/GC2MSlogo.png" height="240" alt="GC2MS"/>--><%= image_tag 'gc2ms.png', :style => "height: 240px" %>
-						</td>
-						<td> 
-							<h1 align="center">MetaMOPE</h1>
-							<h2 align="center">Mobile phase picking and peak evaluation for metabolomics analysis</h>
-						</td>
-					</table>
+				<div>
+					<h1 align="center">MetaMOPE</h1>
+					<h2 style="font-size: 24px" align="center">Mobile phase picking and peak evaluation for metabolomics analysis</h2>
+					<img style="height: 570px; width: 950px" align="center" src="/assets/workflow.jpg">
 				</div>
 			</div> <!-- end of header -->
 			<div id="content" class='container'>
 				<div id="home">
-					<p class='text-center'>
-						description 1
-					</p>
-					<p class='text-center'>
-						description 2
-					</p>
-        		<span class='center-block'>URL: http://gc2ms.cmdm.tw, http://gc2ms.web.cmdm.tw</span>
+					<h4>Workflow</h4>
+					<ul>
+						<li><div>
+							<p class="wf-title">
+								For determining optimized mobile phase: 
+							</p>
+							<p class="wf-content">
+								The input mzXML file of a sample would be read to generate the extracted ion chromatograph(EIC) of standard analyses. 
+								For each analyze peak, MetaMOPE would carry out iteratively reweighed least squares(IRLS) baseline correction and Savitzky-Golay smoothing, 
+								followed by the calculation of maximum intensity, mass chromatographic quality index(MCQ) and asymmetry factor. 
+								If the maximum intensity and MCQ are above user specified threshold, the peak would be validated. 
+								The best mobile phase is the one with the most validated peaks and averaged asymmetry factor.
+							</p>
+						</div></li>
+						<li><div>
+							<p class="wf-title">
+								For fast chromatographic peak evaluation:
+							</p>
+							<p class="wf-content">
+								With baseline correction and smoothing of EIC being performed, MetaMOPE can generate: 
+								MCQ, maximum intensity, relative standard deviation(RSD) of retention time, 
+								ratio of standard over blank(Std/Blk) intensity, jaggedness, asymmetry factor, FWHM and modality. 
+								This is used to assess data quality of chromatographic peaks for metabolomics.
+							</p>
+						</div></li>
+					</ul>
+
+					<h4>Usage</h4>
+					<div>
+						<ol style="line-height: 25px">
+							<li>Create a project & order a service</li>
+							<li>Set project parameters & upload information files</li>
+							<li>Upload mzXML files</li>
+							<li>Run analyses</li>
+							<li>Retrieve result</li>
+						</ol>
+					</div>
+
+					<br>
+        			<span class='center-block'>URL: http://gc2ms.cmdm.tw, http://gc2ms.web.cmdm.tw</span>
 				</div>
 			</div> <!-- end of content -->
 		</div>

@@ -56,7 +56,7 @@ for (i in 1:mobile_phase_n) {
       getPeakInformation(standards=standards,
                         #mzXML_file=paste0(mzXML_dir, mobile_phases[i], "/", mzXML_file),
                         mzXML_file=mzXML_file,
-                        peak_information_file=paste0(peak_information_dir, sub(dirname(mzXML_file), "/", peak_information_file)), 
+                        peak_information_file=paste0(peak_information_dir, sub(dirname(mzXML_file), "", peak_information_file)), 
                         mcq_threshold=mcq_threshold, 
                         intensity_threshold=intensity_threshold, 
                         EIC_ppm_tolerance=EIC_ppm_tolerance[mobile_phases[i], mode], 
