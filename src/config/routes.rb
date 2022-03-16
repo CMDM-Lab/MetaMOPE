@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   post '/uploads/start(/:id)' => 'uploads#create'
   resources :uploads
   
-  post '/projects/new' => 'projects#create'
+  post '/projects/new' => 'projects#create', :as => 'new_project'
   get '/projects/update(/:id)' => 'projects#edit', :as => 'project_update'
   post '/projects/update' => 'projects#update'
   get '/projects/run(/:id)' => 'projects#run', :as => 'run_project'

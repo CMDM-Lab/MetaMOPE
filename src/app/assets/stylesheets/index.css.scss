@@ -48,6 +48,7 @@ body{
     min-height: 50px;
     margin-bottom: 20px;
     border: 1px solid transparent;
+    display: inline;
 }
 
 .navbar-header{
@@ -75,7 +76,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 
 .navbar-brand{
-    margin-left: -75px;
+    margin-left: -80px;
     color: rgb(119,119,119);
     float: left;
     padding: 15px 15px;
@@ -104,10 +105,9 @@ a:hover{
 }
 
 .navbar-nav{
-    display:inline;
+    display: inline;
     float: left;
     margin-right: 200px;
-
 }
 
 .nav{
@@ -145,23 +145,9 @@ li > a{
 }
 
 .fa{
-    display: inline-block;
-}
-
-.fa-plus-circle::before{
-    content: "\f055";
-}
-
-.fa-cloud-upload::before{
-    content: "\f0ee";
-}
-
-.fa-play-circle::before{
-    content: "\f144";
-}
-
-.fa-cloud-download::before{
-    content: "\f0ed";
+    display: inline;
+    margin-left: 15px;
+    line-height: 50px;
 }
 
 .navbar-right{
@@ -209,13 +195,13 @@ h2{
 .mpe-img{
     height: 450px;
     width: 430px;
-    margin-left: 100px;
+    margin-left: 80px;
 }
 
 .rb-img{
     height: 450px;
     width: 200px;
-    margin-left: 100px;
+    margin-left: 90px;
 }
 
 .wf-title{
@@ -327,6 +313,12 @@ label{
 .files-rules > li, .mzxml-rules > li {
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.p-point{
+    display: inline;
+    color: rgb(200, 40, 40);
+    font-weight: bold;
 }
 
 .mzxml{
