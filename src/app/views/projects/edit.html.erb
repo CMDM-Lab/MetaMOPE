@@ -4,31 +4,48 @@
 
     <% if @project.mobile_phase_evaluation %>
         <h3>File format - mobile phase evalution</h3>
-        <ol class="files">
-            <li>Standard file
-                <ul class="files-rules">
-                    <li><p class="p-point">Do not</p> change the name of any columns</li>
-                    <li>There are only <p class="p-point">pos/neg</p> options in <p class="p-point">ion_mode column (always in lowercase letter)</p></li>
-                </ul>
-            </li>
-        </ol>
+        <table>
+            <td>
+                <ol class="files">
+                    <li>Standard file
+                        <ul class="files-rules">
+                            <li><p class="p-point">Do not</p> change the name of any columns</li>
+                            <li>There are only <p class="p-point">pos/neg</p> options in <p class="p-point">ion_mode column (always in lowercase letter)</p></li>
+                        </ul>
+                    </li>
+                </ol>
+            </td>
+            <td>
+                <img src="/assets/mp_std.jpg" style="margin-left: 70px">
+            </td>
+        </table>
     <% elsif @project.peak_evaluation%>
         <h3>File format - peak evaluation</h3>
-        <ol class="files">
-            <li>Injection order file
-                <ul class="files-rules">
-                    <li><p class="p-point">Do not</p> change the name of any columns</li>
-                    <li>Make sure the <p class="p-point">InjectionOrder column</p> of every input are in the right order</li>
-                    <li>Make sure the <p class="p-point">FileName column</p> of every input are the same as the input mzXML files</li>
-                    <li>There are only <p class="p-point">TRUE/FALSE</p> options in <p class="p-point">Blk column(always in capital letter)</p></li>
-                </ul>
-            </li>
-            <li>Standard file
-                <ul>
-                    <li><p class="p-point">Do not</p> change the name of any columns</li>
-                </ul>
-            </li>
-        </ol>
+        <table>
+            <td>
+                <ol class="files">
+                    <li>Injection order file
+                        <ul class="files-rules">
+                            <li><p class="p-point">Do not</p> change the name of any columns</li>
+                            <li>Make sure the <p class="p-point">InjectionOrder column</p> of every input are in the right order</li>
+                            <li>Make sure the <p class="p-point">FileName column</p> of every input are the same as the input mzXML files</li>
+                            <li>There are only <p class="p-point">TRUE/FALSE</p> options in <p class="p-point">Blk column(always in capital letter)</p></li>
+                        </ul>
+                    </li>
+                    <li>Standard file
+                        <ul>
+                            <li><p class="p-point">Do not</p> change the name of any columns</li>
+                        </ul>
+                    </li>
+                </ol>
+            </td>
+            <td rowspan="2">
+                <img src="/assets/ref_lib_inj.jpg" style="margin-left: 70px">
+                <br>
+                <br>
+                <img src="/assets/ref_lib_std.jpg" style="margin-left: 70px">
+            </td>
+        </table>
     <% end %>
 
     <div>
