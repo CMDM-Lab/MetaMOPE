@@ -1,0 +1,36 @@
+<div class="doc">
+    <br>
+    <div align="center">
+        <img class="wf-img mpe-img" src="/assets/MPE_workflow.jpg">
+        <img class="wf-img rb-img" src="/assets/RefLib_workflow.jpg">
+    </div>
+	<div>
+		<ul>
+			<li><div>
+				<p class="wf-title">
+					For determining optimized mobile phase (left) :
+				</p>
+				<p class="wf-content">
+					The input mzXML file of a sample would be read to generate the extracted ion chromatograph(EIC) of standard analyses. 
+					For each analyze peak, MetaMOPE would carry out iteratively reweighed least squares(IRLS) baseline correction and Savitzky-Golay smoothing, 
+					followed by the calculation of maximum intensity, mass chromatographic quality index(MCQ) and asymmetry factor. 
+					If the maximum intensity and MCQ are above user specified threshold, the peak would be validated. 
+					The best mobile phase is the one with the most validated peaks and averaged asymmetry factor.
+				</p>
+			</div></li>
+			<li><div>
+				<p class="wf-title">
+					For fast chromatographic peak evaluation (right) :
+				</p>
+				<p class="wf-content">
+					With baseline correction and smoothing of EIC being performed, MetaMOPE can generate: 
+					MCQ, maximum intensity, relative standard deviation(RSD) of retention time, 
+					ratio of standard over blank(Std/Blk) intensity, jaggedness, asymmetry factor, FWHM and modality. 
+					This is used to assess data quality of chromatographic peaks for metabolomics.
+				</p>
+			</div></li>
+		</ul>
+        <br>
+        <%= link_to("Back to home page", root_path, :class => 'back-to-root') %>
+	</div>
+</div>

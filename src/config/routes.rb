@@ -7,7 +7,10 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'     
   end
  
-  root 'home#index'
+  root 'home#index', :as => 'root'
+
+  get '/document' => 'home#document', :as => 'document'
+  resources :home
   
   get '/uploads/start(/:id)' => 'uploads#start', :as => 'start_upload'
   post '/uploads/start(/:id)' => 'uploads#create'
