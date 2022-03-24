@@ -1,3 +1,4 @@
+<%= javascript_pack_tag :application, 'default' %>
 <div class='content'>
     <h2 style="font-size:36px">Set parameters</h2>
     <hr style="width:1210px">
@@ -75,26 +76,31 @@
         <div class="control-group">
             <% if @project.mobile_phase_evaluation %>
                 <div class="control-group">
+                    <%= f.check_box :is_example, {:id => 'is-example'} %>
+                    <%= f.label :Use_default_parameters %>
+                </div>
+
+                <div class="control-group omit">
                     <%= f.label :Window_size_for_MCQ_calculation, :class => 'control-label' %>
                     <div class="controls field">
                         <%= f.text_field :mcq_win_size, :class => 'form-control' %>
                     </div>
                 </div>
 
-                <div class="control-group">        
+                <div class="control-group omit">        
                     <%= f.label :MCQ_threshold, :class => 'control-label' %>
                     <div class="controls field">
                         <%= f.text_field :mcq_threshold, :class => 'form-control' %>
                     </div>
                 </div>
 
-                <div class="control-group">        
+                <div class="control-group omit">        
                     <%= f.label :Peak_intensity_threshold, :class => 'control-label' %>
                         <div class="controls field">
                             <%= f.text_field :peak_int_threshold, :class => 'form-control' %>
                         </div>
                 </div>
-                <hr style="width:1210px">
+                <br>
 
                 <div class="control-group">
                     <div>
@@ -109,20 +115,25 @@
             
             <% if @project.peak_evaluation %>
                 <div class="control-group">
+                    <%= f.check_box :is_example, {:id => 'is-example'} %>
+                    <%= f.label :Use_default_parameters %>
+                </div>
+
+                <div class="control-group omit">
                     <%= f.label :Window_size_for_MCQ_calculation, :class => 'control-label' %>
                     <div class="controls field">
                         <%= f.text_field :mcq_win_size, :class => 'form-control' %>
                     </div>
                 </div>
 
-                <div class="control-group">        
+                <div class="control-group omit">        
                     <%= f.label :MCQ_threshold, :class => 'control-label' %>
                     <div class="controls field">
                         <%= f.text_field :mcq_threshold, :class => 'form-control' %>
                     </div>
                 </div>
 
-                <div class="control-group">        
+                <div class="control-group omit">        
                     <%= f.label :Peak_intensity_threshold, :class => 'control-label' %>
                         <div class="controls field">
                             <%= f.text_field :peak_int_threshold, :class => 'form-control' %>
@@ -141,7 +152,7 @@
                             <%= f.text_field :rsd_rt, :class => 'form-control' %>
                         </div>
                 </div>
-                <hr style="width:1210px">
+                <br>
 
                 <div class="control-group">
 

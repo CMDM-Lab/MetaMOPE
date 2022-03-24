@@ -14,7 +14,6 @@ class RunPeakEvaluationJob < ApplicationJob
     mcq_win_size = @project.mcq_win_size
     mcq_threshold = @project.mcq_threshold
     intensity_threshold = @project.peak_int_threshold
-    flatness_factor = @project.flat_fac
     std_blk_threshold = @project.std_blk
     rt_rsd_threshold = @project.rsd_rt
     metamope_projects = Rails.root.join('tmp', 'metamope', 'projects').to_s
@@ -22,7 +21,7 @@ class RunPeakEvaluationJob < ApplicationJob
     unless File.exists?(working_dir)
       FileUtils.mkdir_p(working_dir)
     end
-    output = `Rscript --vanilla #{metamope_peak_evaluation} #{working_dir} #{injection_order_file_url} #{standard_file_url} #{mzxml_files_url} #{mcq_win_size} #{mcq_threshold} #{intensity_threshold} #{flatness_factor} #{std_blk_threshold} #{rt_rsd_threshold} 2>&1 > #{metamope_projects}/#{@project.id}/log.txt`
+    output = `Rscript --vanilla #{metamope_peak_evaluation} #{working_dir} #{injection_order_file_url} #{standard_file_url} #{mzxml_files_url} #{mcq_win_size} #{mcq_threshold} #{intensity_threshold} #{std_blk_threshold} #{rt_rsd_threshold} 2>&1 > #{metamope_projects}/#{@project.id}/log.txt`
     #outfile = working_dir + 'result.csv'
     outfile_dir = working_dir + "/result/"
     unless File.exists?(outfile_dir)

@@ -9,9 +9,8 @@ mzXML_files_url = input.arg[4]
 win_size = input.arg[5]
 mcq_threshold = input.arg[6]
 intensity_threshold = input.arg[7]
-flatness_factor = input.arg[8]
-std_blk_threshold = input.arg[9]
-rt_rsd_threshold = input.arg[10]
+std_blk_threshold = input.arg[8]
+rt_rsd_threshold = input.arg[9]
 #need adjustment to deal with the one with no assigned parameters and use the default value as line 36~38
 
 setwd(working_dir)

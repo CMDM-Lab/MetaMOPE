@@ -50,7 +50,7 @@ class ProjectsController < ApplicationController
 
     def edit
         if params[:id].nil?
-            flash[:alert] = 'Please create a project or select a project from Project list to run analyses  (a blue button under the project name)'
+            flash[:alert] = 'Please create a project or select a project from Project list to run analysis  (a blue button under the project name)'
             redirect_to projects_path
             return
         else 
@@ -60,12 +60,23 @@ class ProjectsController < ApplicationController
 
     def update
         if params[:id].nil?
-            flash[:alert] = 'Please create a project or select a project from Project list to run analyses  (a blue button under the project name)'
+            flash[:alert] = 'Please create a project or select a project from Project list to run analysis  (a blue button under the project name)'
             redirect_to projects_path
             return
         else 
             @project = Project.find(params[:id])
-            @project.update(project_params)
+            if @project.is_example
+                @project.mcq_win_size = 3.0
+                @project.mcq_threshold = 0.9
+                if @project.mobile_phase_evaluation
+                    @project.peak_int_threshold = 5000.0
+                elsif @project.peak_evaluation
+                    @project.peak_int_threshold = 1000.0
+                    @project.std_blk = 6.0
+                    @project.rsd_rt = 15.0
+                end
+            end
+            @project.save
             flash[:notice] = "Project has been updated."
             redirect_to projects_path
         end  
@@ -73,7 +84,7 @@ class ProjectsController < ApplicationController
 
     def run
         if params[:id].nil?
-            flash[:alert] = 'Please create a project or select a project from Project list to run analyses  (a blue button under the project name)'
+            flash[:alert] = 'Please create a project or select a project from Project list to run analysis  (a blue button under the project name)'
             redirect_to projects_path 
         return
         else
@@ -141,7 +152,7 @@ class ProjectsController < ApplicationController
     private
     def project_params
         params.require(:project).permit(:access_key, :name, :mobile_phase_evaluation, :peak_evaluation, :state, :upload,
-                                        :injection, :standard,
+                                        :injection, :standard, :is_example,
                                         :mcq_win_size, :flat_fac, :mcq_threshold, :peak_int_threshold, 
                                         :std_blk, :rsd_rt, :output, :uploads_attributes => [:id, :mobile_phase, :_destroy, mzxmls: []])
     end

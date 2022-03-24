@@ -7,10 +7,18 @@
 		</div>
 		<br>
 		<div align="center" class='main-func'>
-			<%= link_to('Click here to start', new_project_path) %>
+			<div>
+				<%= link_to('Click here to start', new_project_path) %>
+				<p style="display: inline">|</p>
+				<%= link_to('Existing projects', projects_path) %>
+			</div>
+			<div style="display: inline">
+				<p style="font-size: 12px; display: inline; margin-right: 70px">(Create a project)</p>
+				<p style="font-size: 12px; display: inline; margin-right: 10px">(My projects)</p>
+			</div>
 			<br>
 			<br>
-			<%= link_to('Document', document_path) %>
+			<%= link_to('FAQs', document_path) %>
 		</div>
 	</div> 
 </div>

@@ -15,3 +15,4 @@ ActiveStorage.start()
 
 require('./nested_form./addFields')
 require('./service_form')
+require('./default')
