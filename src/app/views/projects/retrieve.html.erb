@@ -1,6 +1,6 @@
 <div class="content">
     <h2 style='font-size:36px'>Retrieve result</h2>
-    <div class="well">
+    <div class="well" style="margin-top: 20px">
         <% if @project.state == 'finished' %>
             <%= link_to "Download results", retrieve_dl_project_path(params[:access_key]) %>
         <% else %>
