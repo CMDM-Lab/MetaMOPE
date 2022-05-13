@@ -26,7 +26,6 @@ class UploadsController < ApplicationController
         @project = Project.find(session[:id])
         @upload = @project.uploads.create(upload_params)
         session[:project_id] = @project.id
-        @project.state = "upload"
         @project.save
         if @upload.save
             redirect_to run_project_path

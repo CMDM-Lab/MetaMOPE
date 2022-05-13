@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MetaMOPE</title>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track' => true %>
 </head>
 <body>
@@ -54,10 +54,12 @@
 
 		<%= yield %>
 		
+        <br>
 		<hr>
 			<div class="container">
 					<div class="col-md-2">
-                        <p>
+                        <img style="height: 30px; margin-bottom: 10px; diplay: inline" src="/assets/cmdmlogo.png">
+                        <p style="display:inline">
 						Computational Molecular Design and Metabolomics Laboratory
                         </p>
                         <p>
@@ -72,10 +74,10 @@
 <script>
 
 <% if notice %>
-        showNotice("<%= notice %>");
+    showNotice("<%= notice %>");
 <% end %>
 <% if alert %>
-        showError("<%= alert %>");
+    showError("<%= alert %>");
 <% end %>
 </script>
 	

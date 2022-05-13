@@ -20,6 +20,13 @@
 			<br>
 			<%= link_to('FAQs', document_path) %>
 		</div>
+		<div align='center' style="margin-top: 50px">
+			<% if session[:id].nil? %>
+				<p></p>
+			<% else %>
+				<p>You are now working on project "<%= Project.find(session[:id]).name %>", access key: "<%= Project.find(session[:id]).access_key %>"</p> 
+			<% end %>
+		</div>
 	</div> 
 </div>
 		

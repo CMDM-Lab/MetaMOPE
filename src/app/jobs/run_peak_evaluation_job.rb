@@ -3,9 +3,6 @@ class RunPeakEvaluationJob < ApplicationJob
 
   def perform(project_id)
     @project = Project.find(project_id)
-    @project.state = "running"
-    @project.save
-    #ProjectMailer.notify_progress(@project.user.id, @project.id, Project::RUNNING).deliver_now
     metamope_peak_evaluation = Rails.root.join('lib', 'metamope','build_ref_lib.R').to_s
     injection_order_file_url = Rails.root.join('public','uploads','project','injection').to_s + "/#{@project.id}" + "/#{@project.injection_identifier}"
     standard_file_url = Rails.root.join('public','uploads','project','standard').to_s + "/#{@project.id}" + "/#{@project.standard_identifier}"

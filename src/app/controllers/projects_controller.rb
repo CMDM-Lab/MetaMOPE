@@ -23,7 +23,7 @@ class ProjectsController < ApplicationController
             session[:id] = @project.id
             session[:access_key] = @project.access_key
             flash[:notice] = "Your project has been created."
-            redirect_to projects_path
+            redirect_to project_update_path(session[:id])
         else
 			flash[:alert] = "Something went wrong."
 			render :new
@@ -39,8 +39,10 @@ class ProjectsController < ApplicationController
             @project = Project.find(params[:id])
             if @project.user_id == current_user.id
                 @project.status = "upload"
+                session[:id] = @project.id
                 session[:access_key] = @project.access_key
                 @project.save 
+                redirect_to run_project_path(session[:id])
             else    
                 flash[:alert] = "You have no permission to upload files to this project."
                 redirect_to root_path  
@@ -55,6 +57,7 @@ class ProjectsController < ApplicationController
             return
         else 
             @project = Project.find(params[:id])
+            session[:id] = @project.id
         end
     end
 
@@ -78,7 +81,8 @@ class ProjectsController < ApplicationController
             end
             @project.save
             flash[:notice] = "Project has been updated."
-            redirect_to projects_path
+            session[:id] = @project.id
+            redirect_to start_upload_path(session[:id])
         end  
     end
 
@@ -86,9 +90,10 @@ class ProjectsController < ApplicationController
         if params[:id].nil?
             flash[:alert] = 'Please create a project or select a project from Project list to run analysis  (a blue button under the project name)'
             redirect_to projects_path 
-        return
+            return
         else
             @project = Project.find(params[:id])
+            session[:id] = @project.id
             if @project.user_id == current_user.id
                 @uploads = @project.uploads
                 return @project
@@ -101,8 +106,6 @@ class ProjectsController < ApplicationController
 
     def do_run
         @project = Project.find(params[:id])
-        #@project.status = Project::RUN_PENDING
-        @project.state = "run_pending"
 		@project.save
         if @project.mobile_phase_evaluation & !@project.peak_evaluation
             RunMobilePhaseEvaluationJob.perform_now(@project.id)
@@ -112,8 +115,8 @@ class ProjectsController < ApplicationController
 
         #if success
 		flash[:notice] = "Your project #{@project.name} has been enqueued. "
-		#ProjectMailer.notify_progress(@project.user.id, @project.id, Project::RUN_PENDING).deliver_now
-		redirect_to projects_path
+        session[:access_key] = @project.access_key
+		redirect_to retrieve_project_path(session[:access_key])
 	end
 
     def retrieve
@@ -123,6 +126,7 @@ class ProjectsController < ApplicationController
             return
         else
 			@project = Project.find_by(:access_key => params[:access_key])
+            session[:access_key] = @project.access_key
             return @project
         end
 	end

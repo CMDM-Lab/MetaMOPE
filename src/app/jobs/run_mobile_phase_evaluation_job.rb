@@ -3,9 +3,6 @@ class RunMobilePhaseEvaluationJob < ApplicationJob
 
   def perform(project_id)
     @project = Project.find(project_id)
-    @project.state = "running"
-    @project.save
-    #ProjectMailer.notify_progress(@project.user.id, @project.id, Project::RUNNING).deliver_now
     metamope_mobile_phase_evaluation = Rails.root.join('lib','metamope','mobile_phase_evaluation.R').to_s
     standard_file_url = Rails.root.join('public','uploads','project','standard').to_s + "/#{@project.id}" + "/#{@project.standard_identifier}"
     uploads = @project.uploads

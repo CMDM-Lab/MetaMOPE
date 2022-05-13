@@ -19,9 +19,15 @@
                             Access_key: <%= project.access_key %>
                         </div>
                         <div class='btn-group'>
-                            <%= link_to 'Set parameters', project_update_path(project.id), :title => 'Set parameters' %>
-                            <br>
-                            <%= link_to 'Upload data', start_upload_path(project.id), :title => 'Upload mzXML files' %>
+                            <% if project.state != 'finished' %>
+                                <%= link_to 'Set parameters', project_update_path(project.id), :title => 'Set parameters' %>
+                                <br>
+                                <%= link_to 'Upload data', start_upload_path(project.id), :title => 'Upload mzXML files' %>
+                                <br>
+                                <%= link_to 'Run analysis', run_project_path(project.id), :title => 'Run analysis' %>
+                                <br>
+                            <% end %>
+                            <%= link_to 'Retrieve results', retrieve_project_path(project.access_key), :title => 'Retrieve results' %>
                         </div>
                     </td>
                     <td><%= project.state %></td>

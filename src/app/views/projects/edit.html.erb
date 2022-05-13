@@ -11,7 +11,7 @@
 
                     <li><p style="text-decoration: underline">Standards file</p>
                         <ul class="files-rules">
-                            <li>The <p class="p-point">standard compounds</p> contained in the sample should be listed in this file with their <p class="p-point">m/z</p> in both <p class="p-point">positive</p> and <p class="p-point">negative</p> ion mode</li>
+                            <li>The <p class="p-point">standard compounds</p> contained in the sample should be listed in this file with their <p class="p-point">m/z ratio</p> in both <p class="p-point">positive</p> and <p class="p-point">negative</p> ion mode</li>
                             <li><p class="p-point">Do not</p> change the name of any columns</li>
                             <li>There are only <p class="p-point">pos/neg</p> options in <p class="p-point">ion_mode column (always in lowercase letter)</p></li>
                         </ul>
@@ -19,7 +19,7 @@
 
                     <li><p style="text-decoration: underline">Window size for MCQ calculation</p>
                         <ul class="files-rules">
-                            <li>Assign <p class="p-point">window width</p> to calculate the mass chromatographic quality (MCQ) index</li>
+                            <li>Determine <p class="p-point">window width</p> to calculate the mass chromatographic quality (MCQ) index</li>
                         </ul>
                     </li>
 
@@ -59,7 +59,7 @@
 
                     <li><p style="text-decoration: underline">Standards file</p>
                         <ul class="files-rules">
-                            <li>The <p class="p-point">standard compounds</p> contained in the sample should be listed in this file with their <p class="p-point">m/z</p> in both <p class="p-point">positive</p> and <p class="p-point">negative</p> ion mode</li>
+                            <li>The <p class="p-point">standard compounds</p> contained in the sample should be listed in this file with their <p class="p-point">m/z ratio</p></li>
                             <li><p class="p-point">Do not</p> change the name of any columns</li>
                             <li>There are only <p class="p-point">pos/neg</p> options in <p class="p-point">ion_mode column (always in lowercase letter)</p></li>
                         </ul>
@@ -67,7 +67,7 @@
 
                     <li><p style="text-decoration: underline">Window size for MCQ calculation</p>
                         <ul class="files-rules">
-                            <li>Assign <p class="p-point">window width</p> to calculate the mass chromatographic quality (MCQ) index</li>
+                            <li>Determine <p class="p-point">window width</p> to calculate the mass chromatographic quality (MCQ) index</li>
                         </ul>
                     </li>
 
@@ -134,7 +134,7 @@
             <% if @project.mobile_phase_evaluation %>
                 <div class="control-group">
                     <%= f.check_box :is_example, {:id => 'is-example'} %>
-                    <%= f.label :Use_default_parameters %>
+                    <%= f.label :Use_default_parameters %><p style="font-weight: bold">(window size = 3.0 / MCQ threshold = 0.9 / peak intensity threshold = 5000.0)</p>
                 </div>
 
                 <div class="control-group omit">
@@ -173,7 +173,7 @@
             <% if @project.peak_evaluation %>
                 <div class="control-group">
                     <%= f.check_box :is_example, {:id => 'is-example'} %>
-                    <%= f.label :Use_default_parameters %>
+                    <%= f.label :Use_default_parameters %><p style="font-weight: bold">(window size = 3.0 / MCQ threshold = 0.9 / peak intensity threshold = 1000.0 / STD over BLK = 6.0 / RSD of RT = 15.0)</p>
                 </div>
 
                 <div class="control-group omit">
@@ -232,7 +232,7 @@
             <% end %>
 
         </div>
-        <hr style="width:1210px">
+
         <%= f.submit "Update" %>
 
     <% end %>
