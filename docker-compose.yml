@@ -31,7 +31,7 @@ services:
       args:
         USER_ID: $USER_ID
         GROUP_ID: $GROUP_ID
-    command: foreman start -f Procfile -p 13002
+    command: foreman start -f Procfile.prod -p 13002
     env_file:
       - .env
     volumes:
@@ -41,7 +41,7 @@ services:
       - bundler_gems:/usr/local/bundle/
     ports:
       - "13002:13002"
-      - "35729:35729"
+      #- "35729:35729"
     links:
       - db
     networks:

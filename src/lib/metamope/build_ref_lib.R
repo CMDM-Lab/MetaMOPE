@@ -8,9 +8,13 @@ standard_file = input.arg[3]
 mzXML_files_url = input.arg[4]
 win_size = input.arg[5]
 mcq_threshold = input.arg[6]
+#mcq_threshold = ifelse(input.arg[6] == 'NA', 0.9, as.numeric(input.arg[6]))
 intensity_threshold = input.arg[7]
+#intensity_threshold = ifelse(input.arg[7] == 'NA', 1000, as.numeric(input.arg[7]))
 std_blk_threshold = input.arg[8]
+#std_blk_threshold = ifelse(input.arg[8] == 'NA', 6, as.numeric(input.arg[8]))
 rt_rsd_threshold = input.arg[9]
+#rt_rsd_threshold = ifelse(input.arg[9] == 'NA', 15, as.numeric(input.arg[9]))
 #need adjustment to deal with the one with no assigned parameters and use the default value as line 36~38
 
 setwd(working_dir)

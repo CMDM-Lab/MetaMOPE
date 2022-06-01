@@ -7,12 +7,18 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+
+require('styles')
+
+import "@popperjs/core/"
+import "jquery"
 import "bootstrap"
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-require('./nested_form./addFields')
+require('./nested_form')
 require('./service_form')
 require('./default')
+import('styles/application.scss')

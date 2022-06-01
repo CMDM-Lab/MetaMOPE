@@ -57,7 +57,7 @@ class ProjectsController < ApplicationController
             return
         else 
             @project = Project.find(params[:id])
-            session[:id] = @project.id
+            return @project
         end
     end
 
@@ -68,6 +68,7 @@ class ProjectsController < ApplicationController
             return
         else 
             @project = Project.find(params[:id])
+            @project.update(project_params)
             if @project.is_example
                 @project.mcq_win_size = 3.0
                 @project.mcq_threshold = 0.9

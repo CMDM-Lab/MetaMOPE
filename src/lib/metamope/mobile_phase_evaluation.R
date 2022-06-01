@@ -6,8 +6,11 @@ standard_file = input.arg[2]
 mobile_phases_str = input.arg[3]
 mzxml_files_phases_str = input.arg[4]
 MCQ_win_size = input.arg[5]
+#MCQ_win_size = ifelse(input.arg[5] == 'NA', 3, as.numeric(input.arg[5]))
 mcq_threshold = input.arg[6]
+#mcq_threshold = ifelse(input.arg[6] == 'NA', 0.9, as.numeric(input.arg[6]))
 intensity_threshold = input.arg[7]
+#intensity_threshold = ifelse(input.arg[7] == 'NA', 5000, as.numeric(input.arg[7]))
 #need adjustment to deal with the one with no assigned parameters and use the default value as line 36~38
 
 setwd(working_dir)
