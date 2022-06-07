@@ -1,5 +1,6 @@
 #setwd("~/Desktop/project/xcms/building_reference_library/")
 #options(stringsAsFactors=FALSE)
+.libPaths(c("/usr/local/lib/R/site-library", "/usr/lib/R/site-library", "/usr/lib/R/library"))
 
 input.arg = commandArgs(TRUE)
 working_dir = input.arg[1]

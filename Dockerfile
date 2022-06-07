@@ -30,9 +30,9 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C0
     libxml2-dev
 
 RUN Rscript -e 'if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")'
-RUN Rscript -e 'BiocManager::install("xcms", dependencies=TRUE)'
-RUN Rscript -e 'install.packages("baseline",dependencies=TRUE, repos="http://cran.rstudio.com/")'
-RUN Rscript -e 'install.packages("prospectr",dependencies=TRUE, repos="http://cran.rstudio.com/")'
+RUN Rscript -e 'BiocManager::install("xcms", dependencies=TRUE, lib="/usr/local/lib/R/site-library")'
+RUN Rscript -e 'install.packages("baseline",dependencies=TRUE, repos="http://cran.rstudio.com/", lib="/usr/local/lib/R/site-library")'
+RUN Rscript -e 'install.packages("prospectr",dependencies=TRUE, repos="http://cran.rstudio.com/", lib="/usr/local/lib/R/site-library")'
 
 # Define build arguments
 ARG USER_ID

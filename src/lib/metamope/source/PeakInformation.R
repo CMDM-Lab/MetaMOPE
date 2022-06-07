@@ -1,4 +1,6 @@
 ## library
+.libPaths(c("/usr/local/lib/R/site-library", "/usr/lib/R/site-library", "/usr/lib/R/library"))
+
 library(xcms)
 library(baseline)
 #library(prospectr)
