@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
 
     def upload
         if params[:id].nil?
-            flash[:alert] = 'Please create a project or select a project from Project list to upload your data (a blue button under the project name)'
+            flash[:alert] = 'Please create a project or select a project from Project list to upload your data'
   	        redirect_to projects_path
   		return
         else
@@ -52,7 +52,7 @@ class ProjectsController < ApplicationController
 
     def edit
         if params[:id].nil?
-            flash[:alert] = 'Please create a project or select a project from Project list to run analysis  (a blue button under the project name)'
+            flash[:alert] = 'Please create a project or select a project from Project list to run analysis'
             redirect_to projects_path
             return
         else 
@@ -63,7 +63,7 @@ class ProjectsController < ApplicationController
 
     def update
         if params[:id].nil?
-            flash[:alert] = 'Please create a project or select a project from Project list to run analysis  (a blue button under the project name)'
+            flash[:alert] = 'Please create a project or select a project from Project list to run analysis'
             redirect_to projects_path
             return
         else 
@@ -89,7 +89,7 @@ class ProjectsController < ApplicationController
 
     def run
         if params[:id].nil?
-            flash[:alert] = 'Please create a project or select a project from Project list to run analysis  (a blue button under the project name)'
+            flash[:alert] = 'Please create a project or select a project from Project list to run analysis'
             redirect_to projects_path 
             return
         else
@@ -122,7 +122,7 @@ class ProjectsController < ApplicationController
 
     def retrieve
 		if params[:access_key].nil?
-            flash[:alert] = 'Please create a project or select a project from Project list to retrieve results  (a green button under the project name)'
+            flash[:alert] = 'Please create a project or select a project from Project list to retrieve results'
             redirect_to projects_path
             return
         else
@@ -134,7 +134,7 @@ class ProjectsController < ApplicationController
 
     def retrieve_dl
         if params[:access_key].nil?
-            flash[:alert] = 'Please create a project or select a project from Project list to retrieve results  (a green button under the project name)'
+            flash[:alert] = 'Please create a project or select a project from Project list to retrieve results'
             redirect_to projects_path
             return
         else
