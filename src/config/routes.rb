@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   root 'home#index', :as => 'root'
   get '/document' => 'home#document', :as => 'document'
+  get '/tutorial' => 'home#tutorial', :as => 'tutorial'
   resources :home
   
   get '/uploads/start(/:id)' => 'uploads#start', :as => 'start_upload'

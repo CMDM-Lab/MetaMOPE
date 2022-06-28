@@ -1,0 +1,157 @@
+<div class='container'>
+    <h2 style="font-size:36px">Tutorials</h2>
+    <hr style="width:1210px">
+
+    <div>
+        <div>
+            <p style="font-size:20px">
+                1.
+                Name the new project and select a service.
+                Press the 'Create Project' button.
+            </p>
+        </div>
+        <br>
+        <img style="height:225px;border:0.5px black solid" src=<%=image_path("new.png") %>>
+    </div>
+
+    <br><br><br>
+
+    <div>
+        <div>
+            <p style="font-size:20px">
+                2.
+                Set the parameters and CSV files used in different analysis.
+            </p>
+        </div>
+
+        <br><br>
+        <div>
+            <p style="font-size:16px">
+                (1) mobile phase evaluation<br>
+                <ul>
+                    <li>parameters: window size, MCQ threshold, peak intensity threshold</li><br>
+                    <li>CSV file of chemical standards: chemical standards and their m/z information in positive and negative ion mode</li>
+                </ul>
+            </p>
+        </div>
+        <br>
+        <img style="height:300px;border:0.5px black solid" src=<%=image_path("set_mp.png") %>>
+        <br><br>
+        <div>
+            <p style="text-decoration: underline;font-size:16px">Format of chemical standards file</p>
+            <ul class="files-rules">
+                <li>The <p class="p-point">standard compounds</p> contained in the sample should be listed in this file with their <p class="p-point">m/z ratio</p> in both <p class="p-point">positive</p> and <p class="p-point">negative</p> ion mode</li>
+                <li><p class="p-point">Do not</p> change the name of any columns</li>
+                <li>There are only <p class="p-point">pos/neg</p> options in <p class="p-point">ion_mode column (always in lowercase letter)</p></li>
+            </ul>
+        </div>
+        <img src=<%=image_path("mp_std.png") %>>
+        <br><br><br>
+        <div>
+            <p style="font-size:16px">
+                (2) peak evaluation<br>
+                <ul>
+                    <li>parameters: window size, MCQ threshold, peak intensity threshold, standards over blank, relative standard deviation</li><br>
+                    <li>CSV file of chemical standards: chemical standards and their m/z information in positive or negative ion mode</li><br>
+                    <li>CSV file of injected mzXML file: the filenames and injection order of the mzXML file</li>
+                </ul>
+            </p>
+        </div>
+        <br>
+        <img style="height:400px;border:0.5px black solid" src=<%=image_path("set_rf.png") %>>
+        <br><br>
+        <div>
+            <p style="text-decoration: underline;font-size:16px">Format of injection order file</p>
+            <ul class="files-rules">
+                <li>The mzXML files to be evaluated must be listed in this file <p class="p-point">by their injection order</p></li>
+                <li><p class="p-point">Do not</p> change the name of any columns</li>
+                <li>Make sure the <p class="p-point">InjectionOrder column</p> of every input are in the right order</li>
+                <li>Make sure the <p class="p-point">FileName column</p> of every input are the same as the input mzXML files</li>
+                <li>There are only <p class="p-point">TRUE/FALSE</p> options in <p class="p-point">Blk column(always in capital letter)</p></li>
+            </ul>
+        </div>
+        <img src=<%=image_path("ref_lib_inj.png") %>>
+
+        <div>
+            <br><br>
+            <p style="text-decoration: underline;font-size:16px">Format of chemical standards file</p>
+            <ul class="files-rules">
+                <li>The <p class="p-point">standard compounds</p> contained in the sample should be listed in this file with their <p class="p-point">m/z ratio</p></li>
+                <li><p class="p-point">Do not</p> change the name of any columns</li>
+                <li>There are only <p class="p-point">pos/neg</p> options in <p class="p-point">ion_mode column (always in lowercase letter)</p></li>
+            </ul>
+        </div>
+        <img src=<%=image_path("ref_lib_std.png") %>>
+    </div>
+
+    <br><br><br>
+
+    <div>
+        <p style="font-size:20px">
+            3.
+            Upload mzXML file of mass spectrometry data
+        </p>
+
+        <br>
+        <div>
+            <p style="font-size:16px">
+                (1) mobile phase evaluation<br><br>
+            </p>
+            <p>
+                Upload the mzXML file of mass spectrometry data using different mobile phase compositions.
+                You can press 'New upload' button to generate uploading form.    
+            </p>
+        </div>
+        <br>
+        <img style="height:450px;border:0.5px black solid" src=<%=image_path("upload_mp.png") %>>
+
+        <br><br>
+
+        <div>
+            <p style="font-size:16px">
+                (2) peak evaluation<br> 
+            </p>
+            <p>
+                Upload the mzXML file of mass spectrometry data, including all the samples and blank solution
+            </p>
+        </div>
+        <br>
+        <img style="height:200px;border:0.5px black solid" src=<%=image_path("upload_rf.png") %>>
+        <br><br>
+        <p style="text-decoration: underline;font-size:16px">Filename example:</p>
+        <p class="mzxml-eg" style="display: inline">20140114_A-190<p class="p-point">_pos_BK01_</p>P1-A-9_01_11619.mzXML / 20140114_A-190<p class="p-point">_neg_S001_</p>P1-A-1_01_11620.mzXML</p>
+        <ul class="mzxml-rules">
+            <li>Mark <p class="p-point">'pos'</p> if it's in positive mode;<br> mark <p class="p-point">'neg'</p> if it's in negative mode</li>
+            <li>Mark <p class="p-point">'BK**'</p> if it's blank file;<br> mark <p class="p-point">'S***'</p> if it's sample file (* represents number)</li>
+        </ul>
+
+    </div>
+
+    <br><br><br>
+
+    <div>
+        <p style="font-size:20px">
+            4. Run analysis
+        </p>
+        <br>
+        <p>
+           Press 'Run MetaMOPE' button to run the analysis.
+        </p>
+        <br>
+        <img style="height:300px;border:0.5px black solid" src=<%=image_path("run_mp.png") %>>
+    </div>
+
+    <br><br><br>
+
+    <div>
+        <p style="font-size:20px">
+            5. Retrieve results
+        </p>
+        <br>
+        <p>
+            Press 'Download results' button to retrieve the results of the project.
+        </p>
+        <br>
+        <img style="height:100px;border:0.5px black solid" src=<%=image_path("retrieve.png") %>>
+    </div>
+</div>

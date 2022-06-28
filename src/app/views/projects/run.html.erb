@@ -36,7 +36,7 @@
     </table>
     <h3>Uploaded file</h3>
     <div class="well">
-        <ol>
+        <ul>
             <% if @project.peak_evaluation %>
                 <li><%= @project.injection_identifier %></li>
             <% end %>
@@ -48,7 +48,7 @@
                     <% end %>
                 </li>
             <% end %>
-        </ol>
+        </ul>
     </div>
     <%= link_to 'Run MetaMOPE', do_run_project_path(@project), :class => 'btn btn-primary' %>
 </div>

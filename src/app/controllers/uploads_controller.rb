@@ -12,7 +12,7 @@ class UploadsController < ApplicationController
 
     def start
         if params[:id].nil?
-            flash[:alert] = 'Please create a project or select a project from Project list to run analyses  (a blue button under the project name)'
+            flash[:alert] = 'Please create a project or select a project from Project list to run analyses.'
             redirect_to projects_path
             return
         else
