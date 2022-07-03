@@ -28,5 +28,5 @@ getAsymmetryFactor <- function(sg_spectrum){
   }
   C_rt <- as.numeric(colnames(sg_spectrum)[max_index])
   AsF <- (B_rt - C_rt) / (C_rt - A_rt)
-  return(AsF)
+  return(round(AsF,3))
 }

@@ -21,5 +21,5 @@ getMCQ <- function(eic, win_size=5) {
   
   ## MCQ
   mcq <- sum(intensity_scaled[1:reduced_n] * intensity_ss) / sqrt(scan_n-win_size)
-  return(mcq)
+  return(round(mcq,3))
 }

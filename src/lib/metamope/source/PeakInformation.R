@@ -61,7 +61,7 @@ getPeakInformation <- function(standards, mzXML_file, peak_information_file, mcq
   ## write peak information
   df <- data.frame(Compound=standards$Compound,
                    MCQ=mcqs,
-                   max_intensity=max_intensities,
+                   peak_intensity=max_intensities,
                    asymmetry_factor=AsFs)
   write.csv(df, peak_information_file)
 }

@@ -23,8 +23,8 @@ getPeakQualityScore <- function(all_AsFs, peak_quality_score_file) {
   ## asymmetry factor of commonly detected analytes
   common_AsFs <- na.omit(all_AsFs)
   common_n <- nrow(common_AsFs)
-  mean_AsFs <- colMeans(common_AsFs)
-  sd_AsFs <- apply(common_AsFs, 2, sd)
+  mean_AsFs <- round(colMeans(common_AsFs),3)
+  sd_AsFs <- round(apply(common_AsFs, 2, sd),3)
   mean_AsFs_order <- order(mean_AsFs, decreasing = TRUE)
   common_AsFs_list <- c(common_AsFs[, mean_AsFs_order])
   grouping <- factor(rep(1:mobile_phase_n, each=common_n))
@@ -54,8 +54,8 @@ getPeakQualityScore <- function(all_AsFs, peak_quality_score_file) {
   ## write peak qaulity score table
   df <- data.frame(mobile_phase=colnames(all_AsFs),
                    detected_peaks_amount=detected_n,
-                   common_asymmetry_factors_mean=mean_AsFs, 
-                   common_asymmetry_factors_sd=sd_AsFs,
+                   asymmetry_factors_mean=mean_AsFs, 
+                   asymmetry_factors_sd=sd_AsFs,
                    score_detected_peaks=score_detected_peaks, 
                    score_asymmetry_factor=score_AsFs, 
                    peak_quality_score=score_detected_peaks+score_AsFs)
