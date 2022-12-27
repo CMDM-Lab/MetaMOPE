@@ -55,7 +55,12 @@ for (i in 1:mobile_phase_n) {
       mzXML_files <- append(mzXML_files, paste0(mzXML_files_phases[i], file))
     }
     for (mzXML_file in mzXML_files) {
-      peak_information_file <- sub("\\.mzXML", paste0("_",mode,"_peak_information.csv"), mzXML_file)
+      if (endsWith(mzXML_file, ".mzXML")){
+        peak_information_file <- sub("\\.mzXML", paste0("_",mode,"_peak_information.csv"), mzXML_file)
+      }
+      else if (endsWith(mzXML_file, ".mzML")){
+        peak_information_file <- sub("\\.mzML", paste0("_",mode,"_peak_information.csv"), mzXML_file)
+      }
       getPeakInformation(standards=standards,
                         #mzXML_file=paste0(mzXML_dir, mobile_phases[i], "/", mzXML_file),
                         mzXML_file=mzXML_file,

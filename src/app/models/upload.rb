@@ -4,5 +4,5 @@ class Upload < ApplicationRecord
     mount_uploaders :mzxmls, MzxmlsUploader
     serialize :mzxmls, JSON
 
-    #validates :mzxmls, blob: {content_type: ['application/xml']}
+    validates :mzxmls, blob: {content_type: ['application/mzXML', 'application/mzML']}
 end
