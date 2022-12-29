@@ -56,8 +56,8 @@ getPeakQualityScore <- function(all_AsFs, peak_quality_score_file) {
                    detected_peaks_amount=detected_n,
                    asymmetry_factors_mean=mean_AsFs, 
                    asymmetry_factors_sd=sd_AsFs,
-                   score_detected_peaks=score_detected_peaks, 
-                   score_asymmetry_factor=score_AsFs, 
+                   Sp=score_detected_peaks, 
+                   Saf=score_AsFs, 
                    peak_quality_score=score_detected_peaks+score_AsFs)
   write.csv(df, peak_quality_score_file)
 }

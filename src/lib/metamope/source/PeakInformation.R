@@ -27,6 +27,7 @@ getPeakInformation <- function(standards, mzXML_file, peak_information_file, mcq
     ## EIC
     # source("./source/EIC.R")
     mz_k <- standards[k, ]$mz
+    raw_data <- readMSData(mzXML_file, mode="onDisk")
     eics <- getEICs(raw_data, mz_k, ppm_tolerance=EIC_ppm_tolerance)
     eic_1 <- eics[1, 1]
     

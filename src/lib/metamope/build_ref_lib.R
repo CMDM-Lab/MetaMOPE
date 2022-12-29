@@ -130,6 +130,7 @@ while (s <= sample_n) {
   jaggedness <- asyFactor <- fwhm <- modality <- matrix(0, nrow = standards_n, ncol = rep_n)
   rt_rsd <- vector(mode="numeric", length=standards_n)
   for (r in 1:rep_n) {
+    blk_raw_data <- readMSData(blk_file, mode="onDisk")
     raw_data <- readMSData(mzXML_files[r], mode="onDisk")  
     for (k in 1:standards_n) {
       ## EIC
